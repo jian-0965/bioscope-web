@@ -9,23 +9,22 @@ export async function updateSession(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll(cookiesToSet, headersToSet) {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options);
-          });
-          Object.entries(headersToSet ?? {}).forEach(([name, value]) => {
-            response.headers.set(name, value);
           });
         },
       },
     },
   );
 
-  const { data } = await supabase.auth.getClaims();
-  const isSignedIn = Boolean(data?.claims?.sub);
+  const { data: { user } } = await supabase.auth.getUser();
+  const isSignedIn = Boolean(user);
   const isProtected = request.nextUrl.pathname.startsWith("/dashboard");
   const isAuthPage = request.nextUrl.pathname === "/auth";
 
