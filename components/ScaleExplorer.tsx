@@ -12,6 +12,7 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 import ActionPotentialChart from "@/components/ActionPotentialChart";
 import NeuronScene from "@/components/NeuronScene";
 import { scaleNodes } from "@/data/scaleNodes";
@@ -67,6 +68,13 @@ export default function ScaleExplorer() {
 
   return (
     <main className="page-shell">
+      <nav className="top-nav">
+        <Link className="brand" href="/">BioScope</Link>
+        <div>
+          <Link href="/auth">登录</Link>
+          <Link className="nav-account" href="/dashboard">我的探索</Link>
+        </div>
+      </nav>
       <section className="hero">
         <div className="hero-copy">
           <span className="eyebrow"><Sparkles size={16} /> BioScope · 生命尺度探索器</span>

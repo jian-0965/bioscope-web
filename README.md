@@ -19,28 +19,25 @@
 - TypeScript
 - 原生 CSS
 - lucide-react 图标
+- Supabase Auth、PostgreSQL 与 Row Level Security
 
 ## 本地启动
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
 然后打开 http://localhost:3000
 
-## 数据库计划
+## Supabase 配置
 
-第一版暂时不强依赖数据库，内容存放在 `data/` 中，便于快速迭代。
-后续建议接入 Supabase/PostgreSQL，表结构可按以下方向拆分：
+1. 在 .env.local 填入项目 URL 和 Publishable Key（不要使用 Secret/Service Role Key）。
+2. 在 Supabase SQL Editor 执行 supabase/schema.sql。
+3. 在 Auth URL Configuration 中加入本地与生产地址的 /auth/callback。
 
-- `structures`：生物结构
-- `knowledge_cards`：知识卡
-- `papers`：论文与 DOI
-- `scientists`：科学家角色
-- `experiments`：交互实验配置
-- `citations`：知识点与论文证据关系
-- `user_progress`：用户探索进度与收藏
+已实现邮箱注册、登录、邮箱确认回调、退出、会话刷新、/dashboard 受保护路由，以及带 RLS 的用户资料和学习进度表。
 
 ## 后续开发优先级
 
@@ -49,4 +46,4 @@ npm run dev
 3. 加入动作电位曲线
 4. 加入科学家卡通讲解角色
 5. 接入论文数据与 DOI
-6. 接入 Supabase
+6. 将知识卡与论文内容迁移到 Supabase
