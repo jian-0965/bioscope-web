@@ -3494,3 +3494,46 @@ a { color: inherit; }
   .molecule-one{width:60px;height:60px;font-size:28px;left:38%;top:32%}
   .molecule-two{width:54px;height:54px;font-size:24px;right:17%;top:44%}
 }
+
+
+/* Final auth artwork: exact reference image reconstructed from text chunks */
+.auth-reference-visual{
+  background:#dfead8 !important;
+}
+.auth-artwork-layer{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+}
+.auth-artwork-image{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center center;
+}
+.auth-artwork-loading{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 25% 20%,rgba(255,255,220,.85),transparent 22%),
+    linear-gradient(160deg,#a9d774,#6aa45e 55%,#356a45);
+}
+.auth-reference-visual::after{
+  z-index:2;
+  background:linear-gradient(180deg,rgba(0,35,18,.02),rgba(0,35,18,.13));
+}
+.auth-reference-brand,
+.auth-reference-slogan{
+  z-index:3;
+}
+.auth-code-scene{
+  display:none !important;
+}
+@media(max-width:1100px){
+  .auth-artwork-image{object-position:center 43%;}
+}
+@media(max-width:620px){
+  .auth-artwork-image{object-position:center 42%;}
+}
