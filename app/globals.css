@@ -2964,3 +2964,131 @@ a { color: inherit; }
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Auth illustration hard fallback: independent of scenic background asset */
+.auth-scene-art {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,190,.82), transparent 22%),
+    radial-gradient(circle at 78% 18%, rgba(138,214,255,.72), transparent 28%),
+    linear-gradient(155deg, #dff49c 0%, #a8df72 38%, #4e9f61 100%);
+}
+
+.auth-scene-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .72;
+  background:
+    radial-gradient(ellipse at 5% 15%, #d8f483 0 8%, transparent 8.5%),
+    radial-gradient(ellipse at 15% 4%, #b9e864 0 7%, transparent 7.5%),
+    radial-gradient(ellipse at 85% 8%, #88cf57 0 8%, transparent 8.5%),
+    radial-gradient(ellipse at 95% 20%, #4f9b4e 0 10%, transparent 10.5%),
+    radial-gradient(ellipse at 8% 86%, #74bd54 0 12%, transparent 12.5%),
+    radial-gradient(ellipse at 92% 82%, #3f8c4d 0 13%, transparent 13.5%);
+}
+
+.auth-scene-bio-visual {
+  position: absolute;
+  inset: 95px 30px 80px 30px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.auth-scene-mascot {
+  position: absolute;
+  right: 4%;
+  bottom: -3%;
+  width: min(58%, 620px);
+  max-height: 82%;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(0 24px 30px rgba(20,71,44,.22));
+}
+
+.bio-orb {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255,255,255,.75);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.86), rgba(165,241,217,.58) 42%, rgba(50,156,139,.34) 72%, rgba(255,255,255,.25));
+  box-shadow:
+    inset 0 0 28px rgba(255,255,255,.7),
+    0 18px 50px rgba(28,95,67,.18);
+  backdrop-filter: blur(2px);
+}
+
+.bio-orb span {
+  filter: drop-shadow(0 5px 10px rgba(28,95,67,.16));
+}
+
+.bio-orb-cell {
+  left: 5%;
+  top: 8%;
+  width: clamp(180px, 25vw, 330px);
+  aspect-ratio: 1;
+}
+
+.bio-orb-cell span { font-size: clamp(70px, 10vw, 132px); }
+
+.bio-orb-molecule {
+  left: 9%;
+  bottom: 8%;
+  width: clamp(120px, 17vw, 220px);
+  aspect-ratio: 1;
+}
+
+.bio-orb-molecule span { font-size: clamp(52px, 7vw, 92px); }
+
+.bio-orb-dna {
+  right: 1%;
+  top: 2%;
+  width: clamp(96px, 12vw, 160px);
+  aspect-ratio: 1;
+}
+
+.bio-orb-dna span { font-size: clamp(42px, 6vw, 76px); }
+
+@media (max-width: 980px) {
+  .auth-scene-bio-visual {
+    inset: 52px 18px 44px;
+  }
+
+  .auth-scene-mascot {
+    width: min(48%, 360px);
+    max-height: 90%;
+  }
+
+  .bio-orb-cell {
+    width: 180px;
+  }
+
+  .bio-orb-molecule {
+    width: 120px;
+  }
+}
+
+@media (max-width: 580px) {
+  .auth-scene-bio-visual {
+    inset: 45px 8px 20px;
+  }
+
+  .auth-scene-mascot {
+    width: 52%;
+  }
+
+  .bio-orb-cell {
+    width: 115px;
+  }
+
+  .bio-orb-molecule {
+    width: 76px;
+  }
+
+  .bio-orb-dna {
+    width: 68px;
+  }
+}
