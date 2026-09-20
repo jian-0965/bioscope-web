@@ -13,6 +13,12 @@ export default function AuthPage() {
             <small>在微观世界里，看见生命如何运作</small>
           </div>
         </div>
+        <div className="auth-scene-bio-visual" aria-hidden="true">
+          <div className="bio-orb bio-orb-cell"><span>🧫</span></div>
+          <div className="bio-orb bio-orb-molecule"><span>⚛</span></div>
+          <div className="bio-orb bio-orb-dna"><span>🧬</span></div>
+          <img className="auth-scene-mascot" src="/mascots/mascot-boy.webp" alt="" />
+        </div>
         <div className="auth-scene-quote">
           <strong>探索生命的奥秘，<br />从这里开始</strong>
           <span>从细胞到生态，从机制到未来</span>
