@@ -1428,3 +1428,487 @@ a { color: inherit; }
     text-align: center;
   }
 }
+
+
+/* Biology atlas */
+.atlas-page,
+.domain-page,
+.topic-page,
+.labs-page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 36px 0 80px;
+}
+
+.atlas-hero,
+.domain-hero,
+.topic-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 62px;
+  border: 1px solid rgba(255,255,255,.86);
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(211,245,164,.82), transparent 26%),
+    radial-gradient(circle at 12% 90%, rgba(152,219,201,.25), transparent 30%),
+    rgba(255,255,255,.74);
+  box-shadow: 0 30px 80px rgba(38,83,61,.09);
+}
+
+.atlas-hero h1,
+.domain-hero h1,
+.topic-hero h1 {
+  margin: 14px 0 16px;
+  max-width: 840px;
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: .98;
+  letter-spacing: -.06em;
+  color: #153f32;
+}
+
+.atlas-hero > p,
+.domain-lead,
+.topic-hero > p:last-child {
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.atlas-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 26px;
+  color: #44685b;
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.atlas-hero-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 10px 13px;
+  border-radius: 999px;
+  background: rgba(231,245,215,.72);
+  color: #4d735e;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.atlas-browser {
+  margin-top: 26px;
+}
+
+.atlas-search {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto 22px;
+  padding: 0 18px;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 12px 30px rgba(42,81,62,.07);
+  color: #789087;
+}
+
+.atlas-search input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  color: #204538;
+}
+
+.atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.atlas-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.86);
+  border-radius: 30px;
+  background: rgba(255,255,255,.68);
+  box-shadow: 0 20px 55px rgba(35,76,55,.07);
+}
+
+.atlas-card::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: rgba(177,225,153,.16);
+}
+
+.atlas-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.atlas-emoji { font-size: 38px; }
+.atlas-count {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #eff6ec;
+  color: #658074;
+  font-size: 10px;
+  font-weight: 850;
+}
+.atlas-en {
+  margin: 20px 0 4px;
+  color: #789087;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.atlas-card h2 { margin: 0; font-size: 30px; letter-spacing: -.04em; }
+.atlas-tagline { margin: 8px 0; color: #355f50; font-weight: 800; }
+.atlas-description { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+.atlas-topic-chips,
+.domain-keypoints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0 24px;
+}
+
+.atlas-topic-chips span,
+.domain-keypoints span {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(239,246,236,.92);
+  color: #587264;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.atlas-open,
+.domain-topic-card > a {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--leaf-dark);
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.atlas-empty {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 50px;
+  color: #70857c;
+}
+
+.domain-emoji {
+  font-size: 52px;
+}
+
+.domain-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.domain-topic-card {
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,.88);
+  border-radius: 28px;
+  background: rgba(255,255,255,.7);
+  box-shadow: 0 18px 55px rgba(35,76,55,.07);
+}
+
+.domain-topic-index {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  background: #edf5ec;
+  color: #4d745f;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.domain-topic-card h2 { margin: 5px 0 9px; font-size: 26px; }
+.domain-topic-card > p:not(.atlas-en) { color: var(--muted); line-height: 1.7; font-size: 13px; }
+
+.domain-learning-principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.domain-learning-principles article {
+  display: grid;
+  gap: 7px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(232,244,222,.7);
+  color: #436452;
+}
+.domain-learning-principles span { color: #71857a; font-size: 11px; line-height: 1.5; }
+
+.topic-parent {
+  display: inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(239,246,236,.84);
+  color: #557466;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.topic-layout {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.topic-main-card,
+.topic-side-card {
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.88);
+  border-radius: 28px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 18px 55px rgba(35,76,55,.07);
+}
+
+.topic-main-card {
+  grid-row: span 2;
+}
+
+.topic-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #4d745f;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.topic-main-card h2 { margin: 12px 0 20px; font-size: 30px; }
+
+.topic-key-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.topic-key-grid div {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 16px;
+  background: #f4f8f1;
+}
+.topic-key-grid b { color: #7b9587; font-size: 10px; }
+.topic-key-grid span { font-weight: 800; color: #315849; }
+
+.topic-side-card p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 13px;
+}
+
+.what-if-card { background: linear-gradient(145deg, #fff9e9, rgba(255,255,255,.78)); }
+.evidence-card-v2 { background: linear-gradient(145deg, #eef8f2, rgba(255,255,255,.78)); }
+
+.topic-next {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 20px 24px;
+  border-radius: 22px;
+  background: #173f33;
+  color: white;
+}
+.topic-next div { display: grid; gap: 4px; }
+.topic-next span { color: rgba(255,255,255,.7); font-size: 11px; }
+
+/* Labs */
+.labs-hero { margin-bottom: 22px; }
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.lab-module {
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 28px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 18px 55px rgba(35,76,55,.07);
+}
+.lab-module h2 { margin: 10px 0 8px; font-size: 24px; }
+.lab-module > p { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.lab-select-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 18px;
+}
+.lab-select-row label,
+.lab-range {
+  display: grid;
+  gap: 7px;
+  color: #5b7469;
+  font-size: 10px;
+  font-weight: 800;
+}
+.lab-select-row select {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+}
+.inheritance-results {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.inheritance-results div {
+  flex: 1;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #eff6ed;
+}
+.inheritance-results strong { font-size: 18px; }
+.inheritance-results span { color: #70857b; font-size: 10px; }
+
+.lab-range { margin-top: 16px; }
+.lab-range input { width: 100%; }
+.lab-gauge {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #eff6ed;
+  color: #466758;
+}
+.lab-gauge strong { font-size: 24px; }
+.photosynthesis-meter {
+  height: 12px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7eee4;
+}
+.photosynthesis-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a8d764, #31915c);
+  transition: width .2s ease;
+}
+
+.whole-biology-section {
+  margin-top: 28px;
+  padding-bottom: 26px;
+  border: 1px solid rgba(255,255,255,.88);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(211,244,154,.35), transparent 25%),
+    rgba(255,255,255,.58);
+  box-shadow: 0 24px 65px rgba(35,76,55,.08);
+}
+
+.whole-biology-actions {
+  display: flex;
+  gap: 10px;
+  padding: 8px 30px 4px;
+}
+
+.whole-biology-actions .secondary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .atlas-grid,
+  .domain-topic-grid,
+  .labs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .domain-learning-principles {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-main-card {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .atlas-page,
+  .domain-page,
+  .topic-page,
+  .labs-page {
+    width: min(100% - 20px, 1180px);
+    padding-top: 18px;
+  }
+
+  .atlas-hero,
+  .domain-hero,
+  .topic-hero {
+    padding: 32px 22px;
+    border-radius: 28px;
+  }
+
+  .atlas-hero h1,
+  .domain-hero h1,
+  .topic-hero h1 {
+    font-size: 44px;
+  }
+
+  .topic-key-grid,
+  .lab-select-row {
+    grid-template-columns: 1fr;
+  }
+
+  .whole-biology-actions {
+    flex-direction: column;
+    padding-inline: 18px;
+  }
+}
