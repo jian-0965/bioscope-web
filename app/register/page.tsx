@@ -1,34 +1,40 @@
-import { BookOpen, Network, Sprout } from "lucide-react";
+import { BookOpen, FlaskConical, Network, Sprout } from "lucide-react";
 import RegisterForm from "@/components/RegisterForm";
 
 export default function RegisterPage() {
   return (
-    <main className="register-page">
-      <div className="register-art" aria-hidden="true" />
-
-      <section className="register-panel">
-        <a className="register-back" href="/">← 返回探索器</a>
-
-        <div className="register-card">
-          <div className="register-logo">
-            <span className="leaf-mark">◆</span>
+    <main className="auth-scene-page">
+      <section className="auth-scene-art" aria-label="BioScope 生物科学插画">
+        <div className="auth-scene-brand">
+          <span className="auth-leaf">◆</span>
+          <div>
+            <strong>BioScope</strong>
+            <small>在微观世界里，看见生命如何运作</small>
           </div>
+        </div>
+        <div className="auth-scene-quote">
+          <strong>生命，<br />比你想象的更精彩</strong>
+          <span>用科学的眼睛，发现更大的世界</span>
+        </div>
+      </section>
 
-          <div className="register-copy">
-            <span className="register-kicker">BioScope · 创建学习账户</span>
-            <h1>生物科学可视化科普平台</h1>
-            <p className="register-subtitle">在微观世界里，看见生命如何运作</p>
-            <p className="register-desc">
-              创建账户后，你可以保存探索进度、收藏知识卡，并同步自己的学习路径。
-            </p>
+      <section className="auth-scene-panel">
+        <a className="auth-scene-back" href="/auth">已有账号？立即登录 →</a>
+        <div className="auth-scene-card">
+          <div className="auth-scene-title">
+            <span className="auth-leaf large">◆</span>
+            <p>BioScope · 生物科学可视化科普平台</p>
+            <h1>加入 BioScope</h1>
+            <span>创建你的账号，开启生命科学探索之旅</span>
           </div>
 
           <RegisterForm />
 
-          <div className="register-features">
-            <span><BookOpen size={17} /> 探索生命奥秘</span>
-            <span><Network size={17} /> 可视化学习</span>
-            <span><Sprout size={17} /> 让科学更有趣</span>
+          <div className="auth-scene-features">
+            <span><BookOpen size={18} /><b>丰富科学内容</b></span>
+            <span><FlaskConical size={18} /><b>互动实验模拟</b></span>
+            <span><Network size={18} /><b>个性学习路径</b></span>
+            <span><Sprout size={18} /><b>探索生命奥秘</b></span>
           </div>
         </div>
       </section>
