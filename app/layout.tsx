@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import FloatingMascotAssistant from "@/components/FloatingMascotAssistant";
 
 export const metadata: Metadata = {
   title: "BioScope · 生物科学可视化科普平台",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>{children}<FloatingMascotAssistant /></body>
     </html>
   );
 }
