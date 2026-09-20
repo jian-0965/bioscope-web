@@ -4,46 +4,41 @@ import AuthForm from "@/components/AuthForm";
 
 export default function AuthPage() {
   return (
-    <main className="auth-scene-page">
-      <section className="auth-scene-art" aria-label="BioScope 生物科学插画">
-        <div className="auth-scene-brand">
-          <span className="auth-leaf">◆</span>
+    <main className="auth-reference-page">
+      <section className="auth-reference-visual" aria-label="BioScope 生物科学视觉插画">
+        <div className="auth-reference-brand">
+          <div className="auth-reference-logo">❧</div>
           <div>
             <strong>BioScope</strong>
-            <small>在微观世界里，看见生命如何运作</small>
+            <span>在微观世界里，看见生命如何运作</span>
           </div>
         </div>
-        <div className="auth-scene-bio-visual" aria-hidden="true">
-          <div className="bio-orb bio-orb-cell"><span>🧫</span></div>
-          <div className="bio-orb bio-orb-molecule"><span>⚛</span></div>
-          <div className="bio-orb bio-orb-dna"><span>🧬</span></div>
-          <img className="auth-scene-mascot" src="/mascots/mascot-boy.webp" alt="" />
-        </div>
-        <div className="auth-scene-quote">
-          <strong>探索生命的奥秘，<br />从这里开始</strong>
-          <span>从细胞到生态，从机制到未来</span>
+
+        <div className="auth-reference-slogan">
+          <strong>探索生命的奥秘<br />从这里开始</strong>
+          <i aria-hidden="true" />
         </div>
       </section>
 
-      <section className="auth-scene-panel">
-        <a className="auth-scene-back" href="/">← 返回首页</a>
-        <div className="auth-scene-card">
-          <div className="auth-scene-title">
-            <span className="auth-leaf large">◆</span>
-            <p>BioScope · 生物科学可视化科普平台</p>
+      <section className="auth-reference-panel">
+        <a className="auth-reference-back" href="/">返回首页 <span>→</span></a>
+
+        <div className="auth-reference-card">
+          <div className="auth-reference-heading">
+            <div className="auth-reference-mark">❧</div>
             <h1>欢迎回来</h1>
-            <span>继续你的生命科学探索之旅</span>
+            <p>继续你的生命科学探索之旅</p>
           </div>
 
           <Suspense fallback={<div className="auth-message">正在加载登录界面…</div>}>
             <AuthForm />
           </Suspense>
 
-          <div className="auth-scene-features">
-            <span><BookOpen size={18} /><b>探索生命奥秘</b></span>
-            <span><FlaskConical size={18} /><b>互动实验模拟</b></span>
-            <span><Network size={18} /><b>可视化学习</b></span>
-            <span><Sprout size={18} /><b>让科学更有趣</b></span>
+          <div className="auth-reference-features">
+            <div><BookOpen /><strong>丰富的科普内容</strong><span>系统学习生命科学</span></div>
+            <div><FlaskConical /><strong>互动实验模拟</strong><span>在实践中理解原理</span></div>
+            <div><Network /><strong>个性化学习路径</strong><span>找到适合你的路线</span></div>
+            <div><Sprout /><strong>加入科学社区</strong><span>与同好一起探索</span></div>
           </div>
         </div>
       </section>
