@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import ActionPotentialChart from "@/components/ActionPotentialChart";
 import HumanSystemsMap from "@/components/HumanSystemsMap";
+import MascotGuide from "@/components/MascotGuide";
 import NeuronScene from "@/components/NeuronScene";
 import SiteHeader from "@/components/SiteHeader";
 import { scaleNodes as fallbackScaleNodes, type ScaleNode } from "@/data/scaleNodes";
@@ -316,6 +317,21 @@ export default function ScaleExplorer() {
             <span>不是翻页，是进入生命内部。</span>
           </div>
         </div>
+      </section>
+
+      <section className="mascot-duo-section" aria-label="BioScope 学习导师">
+        <MascotGuide
+          mentor="girl"
+          message="第一次来 BioScope？先不用急着学细节。我会帮你选路线、记录进度，再一步一步把知识连起来。"
+          actionHref="/paths"
+          actionLabel="让我带你选学习路线"
+        />
+        <MascotGuide
+          mentor="boy"
+          message="遇到机制问题就来找我。我们会从结构、变量和实验结果出发，一起弄清楚生命系统为什么这样运作。"
+          actionHref="/labs"
+          actionLabel="跟我做一个互动实验"
+        />
       </section>
 
       <section className="explorer-card" id="explorer">
