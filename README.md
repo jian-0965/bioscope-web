@@ -1,24 +1,89 @@
 # BioScope Web
 
-BioScope 是一个“生命尺度探索器”式的生物科学科普 Web：用户从人体一路放大到大脑、神经元、细胞膜和离子通道，通过点击结构、互动实验、科学史和经典论文理解生命过程。
+BioScope 是一个以“尺度探索 + 思维导图 + 互动实验 + 科学史 + 证据链”为核心的生物科学可视化科普网站。
 
-## 当前版本
+## 当前代码范围
 
-这一版已经形成完整可用的第一章——**神经元世界**：
+### 1. 生命尺度探索器
+- 人体 → 大脑 → 神经元 → 细胞膜 → 离子通道
+- 可点击神经元结构
+- Na⁺ / K⁺ 通道互动
+- 动作电位曲线
+- Supabase 内容读取
+- 用户收藏与完成状态
 
-- 生命尺度探索：人体 → 大脑 → 神经元 → 细胞膜 → 离子通道
-- 可点击神经元：树突、胞体、轴突、突触末梢
-- 知识卡与“如果……会怎样？”模式
-- Na⁺ / K⁺ 通道开关、刺激强度与离子跨膜动画
-- 动作电位曲线与膜电位反馈
-- Hodgkin、Huxley、Neher、Sakmann 等科学史节点
-- 经典论文与 DOI 证据层
-- Supabase 实时内容数据库
-- 邮箱注册 / 登录
-- 收藏、完成状态与学习进度
+### 2. 人体系统思维导图
+- 循环系统
+- 呼吸系统
+- 神经系统
+- 内分泌系统
+- 免疫系统
+- 消化系统
+- 泌尿系统
+- 运动系统
+
+### 3. 生物学全景 Atlas
+包含八大领域：
+- 人体生理
+- 细胞生物学
+- 遗传与基因
+- 生物化学与代谢
+- 微生物世界
+- 植物科学
+- 进化生物学
+- 生态与环境
+
+每个领域都有专题页，每个专题包含：
+- 核心概念
+- 关键词
+- “如果……会怎样？”
+- “我们怎么知道？”
+
+### 4. BioScope Labs
+- 神经元动作电位实验
+- 孟德尔杂交模拟
+- 酶活性环境模拟
+- 光强与光合作用简化模型
+
+### 5. 学习工具
+- 跨领域挑战题
+- 生物学术语词典
+- 推荐学习路线
+- 专题收藏 / 学会状态
 - 用户 Dashboard
-- RLS 安全策略
-- GitHub Actions 类型检查与生产构建
+
+### 6. 用户系统
+- Supabase Auth
+- 邮箱注册 / 登录
+- Profile
+- user_progress
+- RLS
+
+## 页面路由
+
+```text
+/
+├─ /atlas
+│  ├─ /atlas/human
+│  ├─ /atlas/cell
+│  ├─ /atlas/genetics
+│  ├─ /atlas/biochemistry
+│  ├─ /atlas/microbiology
+│  ├─ /atlas/plants
+│  ├─ /atlas/evolution
+│  └─ /atlas/ecology
+│
+│  每个领域继续进入：
+│  /atlas/[领域]/[专题]
+│
+├─ /labs
+├─ /challenges
+├─ /glossary
+├─ /paths
+├─ /auth
+├─ /register
+└─ /dashboard
+```
 
 ## 技术栈
 
@@ -28,24 +93,15 @@ BioScope 是一个“生命尺度探索器”式的生物科学科普 Web：用�
 - Supabase / PostgreSQL
 - Supabase Auth + RLS
 - lucide-react
-- CSS / SVG 动画
+- CSS / SVG
 
 ## 本地运行
 
-复制环境变量：
-
 ```bash
 cp .env.example .env.local
-```
-
-然后：
-
-```bash
 npm ci
 npm run dev
 ```
-
-打开 http://localhost:3000
 
 ## 环境变量
 
@@ -54,26 +110,12 @@ NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
 ```
 
-只在客户端使用 publishable key。不要把 secret/service-role key 放入前端或提交到 GitHub。
-
-## 数据结构
-
-核心表：
-
-- `structures`：生命尺度与结构树
-- `knowledge_cards`：知识卡
-- `papers` / `structure_papers`：论文与结构关系
-- `scientists` / `discoveries`：科学家和发现史
-- `experiments` / `experiment_variables`：互动实验配置
-- `learning_paths` / `learning_path_nodes`：探索路线
-- `profiles` / `user_progress`：用户学习数据
-
-SQL 版本记录位于 `supabase/`。
+不要把 service role key 或其他 secret 放进前端。
 
 ## 产品原则
 
-BioScope 的核心不是“把教科书搬上网页”，而是：
+BioScope 不是把课本搬到网页，而是让学习过程变成：
 
-**探索 → 预测 → 实验 → 观察 → 解释 → 查看证据**
+**探索 → 预测 → 实验 → 观察 → 解释 → 查看证据 → 建立联系**
 
-神经元是第一章。后续可以沿同一套数据模型扩展到线粒体、DNA、蛋白质、免疫系统、光合作用等主题。
+代码层已经按“领域 → 专题 → 知识骨架 → 实验/证据/学习进度”的方式组织，后续新增新主题时不需要重写整站结构。
