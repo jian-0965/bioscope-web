@@ -366,7 +366,7 @@ export default function ScaleExplorer() {
               </button>
             </div>
 
-            {node.id === "neuron" ? (
+            {node.id === "neuron" && cardMode === "overview" ? (
               <>
                 <h2>{selectedInfo.title}</h2>
                 <div className="latin-name">{selectedInfo.en}</div>
