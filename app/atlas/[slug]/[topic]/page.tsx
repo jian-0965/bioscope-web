@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Beaker, BookOpen, CircleHelp, Microscope } from "lucide-react";
 import { notFound } from "next/navigation";
+import TopicProgress from "@/components/TopicProgress";
 import { biologyDomains, getDomain, getSubtopic } from "@/data/biologyAtlas";
 
 export function generateStaticParams() {
@@ -52,6 +53,8 @@ export default async function TopicPage({
           <p>{topic.evidence}</p>
         </article>
       </section>
+
+      <TopicProgress topicKey={domain.slug + ":" + topic.slug} />
 
       <section className="topic-next">
         <BookOpen size={20} />
