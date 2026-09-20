@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Route } from "lucide-react";
 import { learningPaths } from "@/data/learningPaths";
+import MascotGuide from "@/components/MascotGuide";
 
 export default function PathsPage() {
   return (
@@ -11,6 +12,12 @@ export default function PathsPage() {
         <h1>不知道从哪里学？<br />沿着一条路线走就好</h1>
         <p>路线把跨章节知识按因果和尺度串起来，比随机翻知识卡更容易建立完整理解。</p>
       </header>
+
+      <MascotGuide
+        mentor="girl"
+        message="路线不是考试大纲，而是一条把知识串起来的路。第一次来可以从“人体系统入门”开始；想理解遗传信息，就走“从 DNA 到蛋白质”。"
+        compact
+      />
 
       <section className="paths-grid">
         {learningPaths.map((path) => (
