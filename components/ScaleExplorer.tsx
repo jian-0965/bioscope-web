@@ -18,6 +18,7 @@ import {
   Zap,
 } from "lucide-react";
 import ActionPotentialChart from "@/components/ActionPotentialChart";
+import HumanSystemsMap from "@/components/HumanSystemsMap";
 import NeuronScene from "@/components/NeuronScene";
 import SiteHeader from "@/components/SiteHeader";
 import { scaleNodes as fallbackScaleNodes, type ScaleNode } from "@/data/scaleNodes";
@@ -338,9 +339,22 @@ export default function ScaleExplorer() {
 
         <div className="workspace">
           <div className="world-panel">
-            <div className="breadcrumb">人体 <ChevronRight size={14} /> 大脑 <ChevronRight size={14} /> {node.label}</div>
+            <div className="breadcrumb">
+              {node.id === "human" ? (
+                <>人体系统总览</>
+              ) : (
+                <>人体 <ChevronRight size={14} /> 大脑 <ChevronRight size={14} /> {node.label}</>
+              )}
+            </div>
 
-            {node.id === "neuron" ? (
+            {node.id === "human" ? (
+              <HumanSystemsMap
+                onOpenNervous={() => {
+                  const brainIndex = scaleNodes.findIndex((item) => item.id === "brain");
+                  if (brainIndex >= 0) selectScale(brainIndex);
+                }}
+              />
+            ) : node.id === "neuron" ? (
               <NeuronScene selected={selectedPart} onSelect={setSelectedPart} />
             ) : (
               <div className="specimen">
