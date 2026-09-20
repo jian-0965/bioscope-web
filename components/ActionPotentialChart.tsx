@@ -4,12 +4,16 @@ export default function ActionPotentialChart({
   stimulus,
   sodiumOpen,
   potassiumOpen,
+  threshold = 50,
+  restingMv = -70,
 }: {
   stimulus: number;
   sodiumOpen: boolean;
   potassiumOpen: boolean;
+  threshold?: number;
+  restingMv?: number;
 }) {
-  const fires = stimulus >= 50 && sodiumOpen;
+  const fires = stimulus >= threshold && sodiumOpen;
   const path = fires
     ? potassiumOpen
       ? "M15 142 C85 142 112 138 142 130 C164 124 172 94 184 48 C192 20 202 18 210 54 C220 100 234 151 260 166 C292 178 326 145 372 142 C410 140 444 142 485 142"
@@ -28,8 +32,8 @@ export default function ActionPotentialChart({
       <svg viewBox="0 0 500 190" role="img" aria-label="动作电位曲线示意图">
         <line x1="15" y1="142" x2="485" y2="142" className="axis-line" />
         <line x1="15" y1="106" x2="485" y2="106" className="threshold-line" />
-        <text x="20" y="101" className="chart-text">阈值</text>
-        <text x="20" y="158" className="chart-text">-70 mV</text>
+        <text x="20" y="101" className="chart-text">阈值 {threshold}</text>
+        <text x="20" y="158" className="chart-text">{restingMv} mV</text>
         <path d={path} className={fires ? "voltage-path active" : "voltage-path"} />
       </svg>
       <div className="chart-legend">
