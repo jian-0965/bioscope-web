@@ -1,6 +1,6 @@
 "use client";
 
-import { Beaker, BookOpen, BrainCircuit, Compass, Languages, LogIn, Microscope, UserRound } from "lucide-react";
+import { Beaker, BookOpen, BrainCircuit, Compass, Languages, LogIn, Microscope, Route, UserRound } from "lucide-react";
 
 export default function SiteHeader({
   signedIn,
@@ -19,6 +19,7 @@ export default function SiteHeader({
         <a href="/labs"><Beaker size={14} /> 实验室</a>
         <a href="/challenges"><BrainCircuit size={14} /> 挑战</a>
         <a href="/glossary"><Languages size={14} /> 词典</a>
+        <a href="/paths"><Route size={14} /> 路线</a>
         <a href="#discoveries">发现史</a>
         <a href="#papers"><BookOpen size={14} /> 论文</a>
       </nav>
