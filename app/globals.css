@@ -3092,3 +3092,263 @@ a { color: inherit; }
     width: 68px;
   }
 }
+
+
+/* === Auth reference redesign: matches the approved split-screen mockup === */
+.auth-reference-page{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(0,59%) minmax(520px,41%);
+  overflow:hidden;
+  background:#f7fbf5;
+}
+.auth-reference-visual{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  background-image:
+    linear-gradient(180deg,rgba(0,58,24,.04),rgba(0,52,26,.16)),
+    url("/auth-visual.webp");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+.auth-reference-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 30% 12%,rgba(255,255,215,.22),transparent 24%),
+    linear-gradient(90deg,transparent 75%,rgba(245,251,242,.08));
+}
+.auth-reference-brand{
+  position:absolute;
+  z-index:2;
+  top:34px;
+  left:42px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  color:#fff;
+  text-shadow:0 2px 18px rgba(12,65,31,.28);
+}
+.auth-reference-logo{
+  font-size:42px;
+  line-height:.9;
+  transform:rotate(-18deg);
+}
+.auth-reference-brand>div:last-child{display:grid;gap:4px}
+.auth-reference-brand strong{
+  font-size:32px;
+  line-height:1;
+  letter-spacing:-.045em;
+}
+.auth-reference-brand span{
+  font-size:13px;
+  font-weight:700;
+  opacity:.94;
+}
+.auth-reference-slogan{
+  position:absolute;
+  z-index:2;
+  left:48px;
+  bottom:54px;
+  color:#fff;
+  text-shadow:0 3px 20px rgba(8,55,28,.34);
+}
+.auth-reference-slogan strong{
+  display:block;
+  font-size:clamp(38px,3.2vw,58px);
+  line-height:1.25;
+  font-weight:720;
+  letter-spacing:.04em;
+}
+.auth-reference-slogan i{
+  display:block;
+  width:280px;
+  height:3px;
+  margin-top:20px;
+  border-radius:999px;
+  background:rgba(255,255,255,.94);
+  transform:rotate(-8deg);
+  transform-origin:left center;
+}
+.auth-reference-panel{
+  position:relative;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:58px clamp(42px,4.2vw,86px) 34px;
+  background:
+    radial-gradient(circle at 14% 6%,rgba(206,236,180,.14),transparent 24%),
+    linear-gradient(145deg,#fff 0%,#fbfefb 46%,#f4faf3 100%);
+}
+.auth-reference-back{
+  position:absolute;
+  top:32px;
+  right:36px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#44554f;
+  font-size:15px;
+  font-weight:800;
+  text-decoration:none;
+}
+.auth-reference-back span{font-size:22px}
+.auth-reference-card{
+  width:min(100%,600px);
+}
+.auth-reference-heading{
+  text-align:center;
+  margin-bottom:28px;
+}
+.auth-reference-mark{
+  width:70px;
+  height:70px;
+  margin:0 auto 12px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size:44px;
+  line-height:1;
+  border-radius:18px 42px 18px 42px;
+  transform:rotate(-8deg);
+  background:linear-gradient(145deg,#9bdb62,#1c7747);
+}
+.auth-reference-heading h1{
+  margin:0;
+  color:#0f3a28;
+  font-size:clamp(44px,4.3vw,64px);
+  line-height:1.05;
+  letter-spacing:-.045em;
+}
+.auth-reference-heading p{
+  margin:12px 0 0;
+  color:#5f776d;
+  font-size:16px;
+}
+.auth-reference-card .scene-form{gap:0}
+.auth-reference-card .scene-field{
+  min-height:64px;
+  margin-top:15px;
+  border:1px solid #d9e1dc;
+  border-radius:11px;
+  padding:0 17px;
+  color:#7d8885;
+  background:#fff;
+  box-shadow:0 2px 12px rgba(32,77,55,.035);
+}
+.auth-reference-card .scene-field:focus-within{
+  border-color:#4d8d69;
+  box-shadow:0 0 0 4px rgba(45,118,77,.075);
+}
+.auth-reference-card .scene-field input{
+  font-size:16px;
+}
+.scene-field-help{
+  margin:6px 2px 0;
+  color:#87928d;
+  font-size:12px;
+  line-height:1.4;
+}
+.auth-reference-card .scene-terms{
+  margin:22px 2px 14px;
+  color:#354c42;
+  font-size:13px;
+  font-weight:650;
+}
+.auth-reference-card .scene-terms input{
+  width:19px;
+  height:19px;
+}
+.auth-reference-card .scene-submit{
+  min-height:62px;
+  margin-top:3px;
+  border-radius:14px;
+  background:linear-gradient(100deg,#72bd59 0%,#2f8a58 52%,#126642 100%);
+  font-size:18px;
+  box-shadow:0 12px 28px rgba(30,112,70,.18);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+.auth-reference-card .scene-submit:hover{
+  transform:translateY(-1px);
+  filter:saturate(1.05);
+  box-shadow:0 16px 34px rgba(30,112,70,.24);
+}
+.auth-reference-card .scene-divider{
+  margin:20px 0 14px;
+  color:#7d8a84;
+  font-size:13px;
+}
+.auth-reference-card .scene-secondary-action{
+  min-height:54px;
+  border:1.5px solid #286d4d;
+  border-radius:13px;
+  color:#18583d;
+  background:#fff;
+  font-size:16px;
+}
+.auth-reference-features{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:30px;
+}
+.auth-reference-features>div{
+  min-width:0;
+  padding:18px 8px 12px;
+  text-align:center;
+  color:#276748;
+  border-radius:12px;
+  background:linear-gradient(180deg,rgba(248,252,247,.86),rgba(243,249,242,.48));
+}
+.auth-reference-features svg{
+  width:30px;
+  height:30px;
+  margin-bottom:8px;
+  stroke-width:1.8;
+}
+.auth-reference-features strong,
+.auth-reference-features span{display:block}
+.auth-reference-features strong{
+  color:#394b43;
+  font-size:12px;
+  white-space:nowrap;
+}
+.auth-reference-features span{
+  margin-top:5px;
+  color:#839089;
+  font-size:10px;
+  line-height:1.35;
+}
+.auth-reference-page .register-message{
+  margin:12px 0 0;
+  padding:10px 12px;
+  border-radius:10px;
+  color:#2e6c4d;
+  background:#edf7eb;
+  font-size:12px;
+}
+@media(max-width:1100px){
+  .auth-reference-page{grid-template-columns:1fr}
+  .auth-reference-visual{min-height:420px}
+  .auth-reference-panel{min-height:auto;padding:70px 28px 40px}
+  .auth-reference-slogan strong{font-size:40px}
+}
+@media(max-width:620px){
+  .auth-reference-visual{min-height:300px;background-position:48% center}
+  .auth-reference-brand{top:20px;left:20px}
+  .auth-reference-brand strong{font-size:25px}
+  .auth-reference-brand span{font-size:10px}
+  .auth-reference-logo{font-size:34px}
+  .auth-reference-slogan{left:22px;bottom:26px}
+  .auth-reference-slogan strong{font-size:31px}
+  .auth-reference-slogan i{width:190px}
+  .auth-reference-panel{padding:72px 18px 28px}
+  .auth-reference-back{top:22px;right:20px}
+  .auth-reference-heading h1{font-size:40px}
+  .auth-reference-heading p{font-size:13px}
+  .auth-reference-features{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
