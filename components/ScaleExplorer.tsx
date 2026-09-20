@@ -534,6 +534,20 @@ export default function ScaleExplorer() {
         </div>
       </section>
 
+      <section className="whole-biology-section">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow"><Sparkles size={15} /> 生物学全景</span>
+            <h2>神经元不是终点，而是整张生命地图的一条路径</h2>
+          </div>
+          <p>人体、细胞、遗传、代谢、微生物、植物、进化和生态已经接入同一套探索结构。</p>
+        </div>
+        <div className="whole-biology-actions">
+          <a href="/atlas" className="primary cta-link">打开生物学全景地图</a>
+          <a href="/labs" className="secondary cta-link">进入互动实验室</a>
+        </div>
+      </section>
+
       <section className="final-cta">
         <div>
           <span className="eyebrow">下一步：继续进入生命内部</span>
