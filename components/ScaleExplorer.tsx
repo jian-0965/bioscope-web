@@ -461,7 +461,13 @@ export default function ScaleExplorer() {
             </div>
           </div>
 
-          <ActionPotentialChart stimulus={stimulus} sodiumOpen={naOpen} potassiumOpen={kOpen} />
+          <ActionPotentialChart
+            stimulus={stimulus}
+            sodiumOpen={naOpen}
+            potassiumOpen={kOpen}
+            threshold={threshold}
+            restingMv={restingMv}
+          />
         </section>
       )}
 
