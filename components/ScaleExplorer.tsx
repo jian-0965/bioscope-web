@@ -1,23 +1,45 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Atom,
   Beaker,
   BookOpen,
   ChevronRight,
+  Database,
   FlaskConical,
   Microscope,
   ScrollText,
   Sparkles,
   Zap,
 } from "lucide-react";
-import Link from "next/link";
 import ActionPotentialChart from "@/components/ActionPotentialChart";
 import NeuronScene from "@/components/NeuronScene";
-import { scaleNodes } from "@/data/scaleNodes";
+import { scaleNodes as fallbackScaleNodes, type ScaleNode } from "@/data/scaleNodes";
+import { supabase } from "@/lib/supabase";
 
 type NeuronPart = "dendrite" | "soma" | "axon" | "synapse";
+
+type KnowledgeCard = {
+  structure_id: string;
+  title: string;
+  summary: string | null;
+  body: string | null;
+};
+
+type Paper = {
+  title: string;
+  journal: string | null;
+  publication_year: number | null;
+  url: string | null;
+  abstract_summary: string | null;
+};
+
+type Scientist = {
+  name: string;
+  name_zh: string | null;
+  bio: string | null;
+};
 
 const partInfo: Record<NeuronPart, { title: string; en: string; body: string; facts: string[] }> = {
   dendrite: {
@@ -47,37 +69,148 @@ const partInfo: Record<NeuronPart, { title: string; en: string; body: string; fa
 };
 
 export default function ScaleExplorer() {
+  const [scaleNodes, setScaleNodes] = useState<ScaleNode[]>(fallbackScaleNodes);
+  const [knowledgeCards, setKnowledgeCards] = useState<KnowledgeCard[]>([]);
+  const [papers, setPapers] = useState<Paper[]>([]);
+  const [scientists, setScientists] = useState<Scientist[]>([]);
+  const [dataStatus, setDataStatus] = useState<"loading" | "live" | "fallback">("loading");
+
   const [index, setIndex] = useState(2);
   const [labOpen, setLabOpen] = useState(true);
   const [naOpen, setNaOpen] = useState(true);
   const [kOpen, setKOpen] = useState(true);
   const [stimulus, setStimulus] = useState(62);
+  const [threshold, setThreshold] = useState(50);
+  const [restingMv, setRestingMv] = useState(-70);
+  const [peakMv, setPeakMv] = useState(30);
   const [selectedPart, setSelectedPart] = useState<NeuronPart>("soma");
 
-  const node = scaleNodes[index];
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadContent() {
+      try {
+        const [structuresResult, cardsResult, papersResult, scientistsResult, experimentResult, variablesResult] =
+          await Promise.all([
+            supabase
+              .from("structures")
+              .select("id,name_zh,name_en,scale_label,description,display_order")
+              .order("display_order"),
+            supabase
+              .from("knowledge_cards")
+              .select("structure_id,title,summary,body,display_order")
+              .order("display_order"),
+            supabase
+              .from("papers")
+              .select("title,journal,publication_year,url,abstract_summary")
+              .order("publication_year", { ascending: true }),
+            supabase
+              .from("scientists")
+              .select("name,name_zh,bio")
+              .order("id"),
+            supabase
+              .from("experiments")
+              .select("config")
+              .eq("id", "neuron-action-potential")
+              .maybeSingle(),
+            supabase
+              .from("experiment_variables")
+              .select("key,default_value,config")
+              .eq("experiment_id", "neuron-action-potential"),
+          ]);
+
+        const firstError =
+          structuresResult.error ||
+          cardsResult.error ||
+          papersResult.error ||
+          scientistsResult.error ||
+          experimentResult.error ||
+          variablesResult.error;
+
+        if (firstError) throw firstError;
+        if (cancelled) return;
+
+        if (structuresResult.data?.length) {
+          const localLinks = new Map(fallbackScaleNodes.map((node) => [node.id, node.links]));
+          setScaleNodes(
+            structuresResult.data.map((row) => ({
+              id: row.id,
+              label: row.name_zh,
+              subtitle: row.name_en ?? "",
+              scale: row.scale_label ?? "—",
+              description: row.description ?? "",
+              facts: [],
+              links: localLinks.get(row.id) ?? [],
+            })),
+          );
+        }
+
+        setKnowledgeCards((cardsResult.data ?? []) as KnowledgeCard[]);
+        setPapers((papersResult.data ?? []) as Paper[]);
+        setScientists((scientistsResult.data ?? []) as Scientist[]);
+
+        const config = experimentResult.data?.config;
+        if (config && typeof config === "object" && !Array.isArray(config)) {
+          const record = config as Record<string, unknown>;
+          if (typeof record.threshold === "number") setThreshold(record.threshold);
+          if (typeof record.resting_mv === "number") setRestingMv(record.resting_mv);
+          if (typeof record.peak_mv === "number") setPeakMv(record.peak_mv);
+        }
+
+        for (const variable of variablesResult.data ?? []) {
+          if (variable.key === "stimulus" && typeof variable.default_value === "number") {
+            setStimulus(variable.default_value);
+          }
+          if (variable.key === "sodium_channel" && variable.config && typeof variable.config === "object") {
+            const config = variable.config as Record<string, unknown>;
+            if (typeof config.default === "boolean") setNaOpen(config.default);
+          }
+          if (variable.key === "potassium_channel" && variable.config && typeof variable.config === "object") {
+            const config = variable.config as Record<string, unknown>;
+            if (typeof config.default === "boolean") setKOpen(config.default);
+          }
+        }
+
+        setDataStatus("live");
+      } catch (error) {
+        console.error("BioScope Supabase load failed:", error);
+        if (!cancelled) setDataStatus("fallback");
+      }
+    }
+
+    loadContent();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const safeIndex = Math.min(index, Math.max(scaleNodes.length - 1, 0));
+  const node = scaleNodes[safeIndex] ?? fallbackScaleNodes[0];
   const selectedInfo = partInfo[selectedPart];
+  const dbCard = knowledgeCards.find((card) => card.structure_id === node.id);
+  const featuredPaper = papers[0];
+  const featuredScientists = scientists.slice(0, 2);
 
   const membraneVoltage = useMemo(() => {
-    if (!naOpen && !kOpen) return -70;
-    if (stimulus < 50) return -70 + Math.round(stimulus * 0.18);
-    if (naOpen && stimulus >= 50) return kOpen ? 30 : 42;
-    return -62;
-  }, [stimulus, naOpen, kOpen]);
+    if (!naOpen && !kOpen) return restingMv;
+    if (stimulus < threshold) return restingMv + Math.round(stimulus * 0.18);
+    if (naOpen && stimulus >= threshold) return kOpen ? peakMv : peakMv + 12;
+    return restingMv + 8;
+  }, [stimulus, naOpen, kOpen, threshold, restingMv, peakMv]);
 
-  const firing = stimulus >= 50 && naOpen;
+  const firing = stimulus >= threshold && naOpen;
 
   return (
     <main className="page-shell">
-      <nav className="top-nav">
-        <Link className="brand" href="/">BioScope</Link>
-        <div>
-          <Link href="/auth">登录</Link>
-          <Link className="nav-account" href="/dashboard">我的探索</Link>
-        </div>
-      </nav>
       <section className="hero">
         <div className="hero-copy">
-          <span className="eyebrow"><Sparkles size={16} /> BioScope · 生命尺度探索器</span>
+          <div className="eyebrow-row">
+            <span className="eyebrow"><Sparkles size={16} /> BioScope · 生命尺度探索器</span>
+            <span className={dataStatus === "live" ? "data-badge live" : "data-badge"}>
+              <Database size={13} />
+              {dataStatus === "loading" ? "连接数据库中" : dataStatus === "live" ? "Supabase 实时内容" : "本地备用内容"}
+            </span>
+          </div>
           <h1>进入生命的微观世界</h1>
           <p>从人体一路放大到细胞与离子通道。点击结构、改变变量，再亲眼看看生命系统会发生什么。</p>
           <div className="hero-actions">
@@ -106,7 +239,7 @@ export default function ScaleExplorer() {
       <section className="explorer-card">
         <div className="scale-bar">
           {scaleNodes.map((item, i) => (
-            <button key={item.id} className={i === index ? "scale-dot active" : "scale-dot"} onClick={() => setIndex(i)}>
+            <button key={item.id} className={i === safeIndex ? "scale-dot active" : "scale-dot"} onClick={() => setIndex(i)}>
               <b>{item.label}</b>
               <span>{item.scale}</span>
             </button>
@@ -117,7 +250,7 @@ export default function ScaleExplorer() {
           <div className="world-panel">
             <div className="breadcrumb">人体 <ChevronRight size={14} /> 大脑 <ChevronRight size={14} /> {node.label}</div>
 
-            {index === 2 ? (
+            {node.id === "neuron" ? (
               <NeuronScene selected={selectedPart} onSelect={setSelectedPart} />
             ) : (
               <div className="specimen">
@@ -130,14 +263,15 @@ export default function ScaleExplorer() {
             )}
 
             <div className="world-actions">
-              <button onClick={() => setIndex(Math.max(0, index - 1))}>缩小一级</button>
-              <button onClick={() => setIndex(Math.min(scaleNodes.length - 1, index + 1))}>放大一级</button>
+              <button onClick={() => setIndex(Math.max(0, safeIndex - 1))}>缩小一级</button>
+              <button onClick={() => setIndex(Math.min(scaleNodes.length - 1, safeIndex + 1))}>放大一级</button>
             </div>
           </div>
 
           <aside className="knowledge-card">
             <div className="card-kicker"><BookOpen size={16} /> 知识卡</div>
-            {index === 2 ? (
+
+            {node.id === "neuron" ? (
               <>
                 <h2>{selectedInfo.title}</h2>
                 <div className="latin-name">{selectedInfo.en}</div>
@@ -148,10 +282,10 @@ export default function ScaleExplorer() {
               </>
             ) : (
               <>
-                <h2>{node.label}</h2>
+                <h2>{dbCard?.title ?? node.label}</h2>
                 <div className="latin-name">{node.subtitle}</div>
-                <p className="muted">{node.description}</p>
-                <div className="fact-list">{node.facts.map((fact) => <div key={fact}>• {fact}</div>)}</div>
+                <p className="muted">{dbCard?.summary ?? node.description}</p>
+                {dbCard?.body && <div className="db-card-body">{dbCard.body}</div>}
               </>
             )}
 
@@ -169,7 +303,7 @@ export default function ScaleExplorer() {
             <div>
               <span className="eyebrow"><Zap size={15} /> 神经元实验室</span>
               <h2>亲手触发一次动作电位</h2>
-              <p>调整刺激强度、关闭离子通道，然后观察膜电位曲线和离子运动怎样变化。</p>
+              <p>这些默认实验参数现在已经从 Supabase 读取。调整刺激强度、关闭离子通道，再观察膜电位曲线。</p>
             </div>
             <div className={firing ? "experiment-badge live" : "experiment-badge"}>
               {firing ? "实验进行中" : "等待刺激"}
@@ -181,7 +315,7 @@ export default function ScaleExplorer() {
               <div className="control-heading"><FlaskConical size={18} /> 实验控制</div>
               <label>刺激强度 <strong>{stimulus}</strong></label>
               <input type="range" min="0" max="100" value={stimulus} onChange={(e) => setStimulus(Number(e.target.value))} />
-              <div className="threshold-note">阈值参考：50</div>
+              <div className="threshold-note">数据库阈值：{threshold}</div>
               <button className={naOpen ? "toggle on" : "toggle"} onClick={() => setNaOpen((v) => !v)}>
                 <span className="ion-dot sodium">Na⁺</span> Na⁺ 通道：{naOpen ? "开启" : "关闭"}
               </button>
@@ -242,17 +376,33 @@ export default function ScaleExplorer() {
           </div>
           <div>
             <span className="eyebrow"><ScrollText size={15} /> 科学史讲解</span>
-            <h3>Hodgkin & Huxley</h3>
-            <p>“别只记住动作电位的形状。真正关键的问题是：膜对 Na⁺ 和 K⁺ 的通透性，为什么会随时间改变？”</p>
+            <h3>
+              {featuredScientists.length
+                ? featuredScientists.map((scientist) => scientist.name.split(" ").slice(-1)[0]).join(" & ")
+                : "Hodgkin & Huxley"}
+            </h3>
+            <p>
+              {featuredScientists[0]?.bio ??
+                "“别只记住动作电位的形状。真正关键的问题是：膜对 Na⁺ 和 K⁺ 的通透性，为什么会随时间改变？”"}
+            </p>
           </div>
         </article>
 
         <article className="paper-card">
-          <span className="eyebrow"><BookOpen size={15} /> 经典论文</span>
-          <h3>A quantitative description of membrane current...</h3>
-          <p>1952 · Journal of Physiology</p>
-          <a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noreferrer">
-            打开 DOI ↗
+          <span className="eyebrow"><BookOpen size={15} /> 数据库论文</span>
+          <h3>{featuredPaper?.title ?? "A quantitative description of membrane current..."}</h3>
+          <p>
+            {featuredPaper
+              ? [featuredPaper.publication_year, featuredPaper.journal].filter(Boolean).join(" · ")
+              : "1952 · The Journal of Physiology"}
+          </p>
+          {featuredPaper?.abstract_summary && <p className="paper-summary">{featuredPaper.abstract_summary}</p>}
+          <a
+            href={featuredPaper?.url ?? "https://doi.org/10.1113/jphysiol.1952.sp004764"}
+            target="_blank"
+            rel="noreferrer"
+          >
+            打开论文 ↗
           </a>
         </article>
       </section>
