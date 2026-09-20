@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, LogIn, Microscope, UserRound } from "lucide-react";
+import { Beaker, BookOpen, Compass, LogIn, Microscope, UserRound } from "lucide-react";
 
 export default function SiteHeader({
   signedIn,
@@ -14,8 +14,9 @@ export default function SiteHeader({
         <span><b>BioScope</b><small>生命尺度探索器</small></span>
       </a>
       <nav className="site-nav" aria-label="主导航">
-        <a href="#explorer">探索</a>
-        <a href="#lab">实验</a>
+        <a href="/atlas"><Compass size={14} /> 生物全景</a>
+        <a href="#explorer">尺度探索</a>
+        <a href="/labs"><Beaker size={14} /> 实验室</a>
         <a href="#discoveries">发现史</a>
         <a href="#papers"><BookOpen size={14} /> 论文</a>
       </nav>
