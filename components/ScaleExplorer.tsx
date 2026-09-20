@@ -545,6 +545,8 @@ export default function ScaleExplorer() {
         <div className="whole-biology-actions">
           <a href="/atlas" className="primary cta-link">打开生物学全景地图</a>
           <a href="/labs" className="secondary cta-link">进入互动实验室</a>
+          <a href="/challenges" className="secondary cta-link">挑战我的理解</a>
+          <a href="/glossary" className="secondary cta-link">打开生物学词典</a>
         </div>
       </section>
 
