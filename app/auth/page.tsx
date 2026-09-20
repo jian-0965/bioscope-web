@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import AuthForm from "@/components/AuthForm";
 
 export default function AuthPage() {
@@ -10,7 +11,9 @@ export default function AuthPage() {
           <h1>保存你的生命探索旅程</h1>
           <p>登录后可以同步收藏、实验记录和学习进度。</p>
         </div>
-        <AuthForm />
+        <Suspense fallback={<div className="auth-message">正在加载登录界面…</div>}>
+          <AuthForm />
+        </Suspense>
       </section>
     </main>
   );
