@@ -12,6 +12,12 @@ export default function RegisterPage() {
             <small>在微观世界里，看见生命如何运作</small>
           </div>
         </div>
+        <div className="auth-scene-bio-visual" aria-hidden="true">
+          <div className="bio-orb bio-orb-cell"><span>🧫</span></div>
+          <div className="bio-orb bio-orb-molecule"><span>⚛</span></div>
+          <div className="bio-orb bio-orb-dna"><span>🧬</span></div>
+          <img className="auth-scene-mascot" src="/mascots/mascot-girl.webp" alt="" />
+        </div>
         <div className="auth-scene-quote">
           <strong>生命，<br />比你想象的更精彩</strong>
           <span>用科学的眼睛，发现更大的世界</span>
