@@ -3352,3 +3352,145 @@ a { color: inherit; }
   .auth-reference-heading p{font-size:13px}
   .auth-reference-features{grid-template-columns:repeat(2,minmax(0,1fr));}
 }
+
+
+/* Auth left illustration rewritten as actual DOM/SVG code, no external hero dependency */
+.auth-reference-visual{
+  background:
+    radial-gradient(circle at 24% 17%,rgba(255,255,212,.88),transparent 19%),
+    linear-gradient(180deg,#87cef5 0%,#c7edf4 34%,#8ecf72 67%,#4c9156 100%) !important;
+}
+.auth-code-scene{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:1;
+}
+.auth-code-scene::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 7% 8%,#d9f477 0 8%,transparent 8.5%),
+    radial-gradient(ellipse at 17% 2%,#b9e95d 0 9%,transparent 9.5%),
+    radial-gradient(ellipse at 88% 4%,#76c653 0 10%,transparent 10.5%),
+    radial-gradient(ellipse at 97% 19%,#4e9f50 0 12%,transparent 12.5%),
+    radial-gradient(ellipse at 6% 82%,#72bd54 0 13%,transparent 13.5%),
+    radial-gradient(ellipse at 93% 87%,#3d8249 0 15%,transparent 15.5%);
+  opacity:.92;
+}
+.auth-code-scene::after{
+  content:"";
+  position:absolute;
+  left:-5%;
+  right:-5%;
+  bottom:-12%;
+  height:55%;
+  background:
+    radial-gradient(circle at 12% 42%,#74ba52 0 8%,transparent 8.4%),
+    radial-gradient(circle at 28% 60%,#5ca24f 0 11%,transparent 11.4%),
+    radial-gradient(circle at 45% 43%,#7bc359 0 9%,transparent 9.4%),
+    radial-gradient(circle at 65% 57%,#4f974b 0 12%,transparent 12.4%),
+    radial-gradient(circle at 84% 37%,#6daf4f 0 10%,transparent 10.4%),
+    linear-gradient(180deg,transparent,#4c914d 40%,#2e6d42 100%);
+}
+.auth-sun{
+  position:absolute;
+  width:220px;
+  height:220px;
+  left:8%;
+  top:3%;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff8ba 0 17%,rgba(255,245,151,.7) 36%,rgba(255,249,180,.16) 68%,transparent 72%);
+  filter:blur(2px);
+  z-index:0;
+}
+.auth-sky-cloud{
+  position:absolute;
+  width:240px;
+  height:62px;
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+  filter:blur(10px);
+  z-index:0;
+}
+.cloud-one{left:34%;top:13%}
+.cloud-two{left:52%;top:23%;transform:scale(.75)}
+.auth-leaf-cluster{
+  position:absolute;
+  width:220px;
+  height:160px;
+  z-index:2;
+  opacity:.96;
+  background:
+    radial-gradient(ellipse at 18% 28%,#d9f66f 0 14%,transparent 14.8%),
+    radial-gradient(ellipse at 45% 18%,#b4e35b 0 15%,transparent 15.8%),
+    radial-gradient(ellipse at 72% 35%,#71bd4f 0 16%,transparent 16.8%),
+    radial-gradient(ellipse at 34% 66%,#8acd56 0 16%,transparent 16.8%),
+    radial-gradient(ellipse at 68% 72%,#4d9850 0 17%,transparent 17.8%);
+}
+.leaf-a{left:-5%;top:-2%;transform:rotate(-12deg)}
+.leaf-b{right:-4%;top:-2%;transform:rotate(20deg) scale(1.1)}
+.leaf-c{left:-3%;bottom:8%;transform:rotate(8deg) scale(1.2)}
+.auth-cell-graphic{
+  position:absolute;
+  left:4%;
+  top:22%;
+  width:min(34vw,420px);
+  z-index:3;
+  filter:drop-shadow(0 18px 24px rgba(24,91,59,.18));
+}
+.auth-dna-graphic{
+  position:absolute;
+  right:1%;
+  top:11%;
+  width:min(16vw,190px);
+  z-index:3;
+  transform:rotate(18deg);
+  filter:drop-shadow(0 16px 22px rgba(32,89,70,.16));
+}
+.auth-molecule{
+  position:absolute;
+  z-index:4;
+  display:grid;
+  place-items:center;
+  border:3px solid rgba(255,255,255,.74);
+  border-radius:50%;
+  color:#4b9f87;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.92),rgba(200,249,228,.66) 55%,rgba(94,176,150,.38));
+  box-shadow:inset 0 0 24px rgba(255,255,255,.7),0 15px 30px rgba(20,89,57,.15);
+  backdrop-filter:blur(2px);
+}
+.molecule-one{
+  width:120px;height:120px;left:35%;top:28%;font-size:52px;
+}
+.molecule-two{
+  width:105px;height:105px;right:14%;top:37%;font-size:42px;
+}
+.auth-code-mascot{
+  position:absolute;
+  z-index:4;
+  right:6%;
+  bottom:-3%;
+  width:min(52%,560px);
+  max-height:70%;
+  object-fit:contain;
+  object-position:bottom center;
+  filter:drop-shadow(0 26px 35px rgba(21,70,45,.24));
+}
+.auth-reference-brand,
+.auth-reference-slogan{z-index:6}
+@media(max-width:1100px){
+  .auth-cell-graphic{width:250px;top:12%}
+  .auth-dna-graphic{width:130px}
+  .auth-code-mascot{width:min(46%,360px);max-height:84%}
+  .molecule-one{width:90px;height:90px;font-size:38px}
+  .molecule-two{width:78px;height:78px;font-size:32px}
+}
+@media(max-width:620px){
+  .auth-cell-graphic{width:150px;top:25%}
+  .auth-dna-graphic{width:82px;right:2%}
+  .auth-code-mascot{width:48%;right:5%;max-height:74%}
+  .molecule-one{width:60px;height:60px;font-size:28px;left:38%;top:32%}
+  .molecule-two{width:54px;height:54px;font-size:24px;right:17%;top:44%}
+}
