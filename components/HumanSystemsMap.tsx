@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ComponentType } from "react";
 import {
   Activity,
   Bone,
@@ -32,7 +32,7 @@ type SystemInfo = {
   summary: string;
   nodes: string[];
   accent: string;
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  icon: ComponentType<{ size?: number; strokeWidth?: number }>;
 };
 
 const systems: SystemInfo[] = [
