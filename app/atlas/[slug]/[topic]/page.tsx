@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Beaker, BookOpen, CircleHelp, Microscope } from "lucide-react";
 import { notFound } from "next/navigation";
 import TopicProgress from "@/components/TopicProgress";
+import MascotGuide from "@/components/MascotGuide";
 import { biologyDomains, getDomain, getSubtopic } from "@/data/biologyAtlas";
 
 export function generateStaticParams() {
@@ -31,6 +32,12 @@ export default async function TopicPage({
         <h1>{topic.name}</h1>
         <p>{topic.summary}</p>
       </header>
+
+      <MascotGuide
+        mentor="boy"
+        message={"这一页先抓住“" + topic.keyPoints.slice(0, 2).join("、") + "”这几个核心词，再去看如果系统被扰动会发生什么。"}
+        compact
+      />
 
       <section className="topic-layout">
         <article className="topic-main-card">
