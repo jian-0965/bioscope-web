@@ -241,3 +241,45 @@ a { color: inherit; }
   .scientist-card { grid-template-columns:1fr; }
   .roadmap { grid-template-columns:1fr; }
 }
+
+
+.eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.data-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.68);
+  border: 1px solid var(--line);
+  color: #758a82;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.data-badge.live {
+  background: #e4f6df;
+  color: var(--leaf-dark);
+  box-shadow: 0 0 0 6px rgba(69,145,89,.05);
+}
+
+.db-card-body {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(237,246,231,.72);
+  color: #365a50;
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.paper-summary {
+  margin-top: 12px !important;
+  font-size: 13px;
+}
