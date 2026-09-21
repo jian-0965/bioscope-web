@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { BookOpen, FlaskConical, Map, Route, Sparkles, X } from "lucide-react";
 import MascotAvatar from "@/components/MascotAvatar";
+import AIMentorChat from "@/components/AIMentorChat";
 import { usePathname } from "next/navigation";
 
 const routeHints = {
@@ -57,7 +58,7 @@ export default function FloatingMascotAssistant() {
               <span>{hint.role}</span>
             </div>
           </div>
-          <p>{hint.text}</p>
+          <AIMentorChat compact pageContext={"当前页面路径：" + pathname} starter={hint.text} />
           <div className="floating-mentor-links">
             <Link href="/atlas"><Map size={14} /> 生物全景</Link>
             <Link href="/paths"><Route size={14} /> 学习路线</Link>
