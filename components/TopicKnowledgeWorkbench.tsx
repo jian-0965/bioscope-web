@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Beaker, BookOpen, CircleHelp, FlaskConical, Lightbulb, Link2, Microscope, Network, Sparkles } from "lucide-react";
 import ExperimentStudio from "@/components/ExperimentStudio";
+import AIMentorChat from "@/components/AIMentorChat";
 import type { BiologySubtopic } from "@/data/biologyAtlas";
 
 type Tab = "core" | "whatif" | "evidence" | "connections" | "quiz";
@@ -74,6 +75,18 @@ export default function TopicKnowledgeWorkbench({
         </article>
       )}
 
+      <AIMentorChat
+        compact
+        pageContext={[
+          "领域：" + domainName,
+          "主题：" + topic.name,
+          "简介：" + topic.summary,
+          "关键词：" + topic.keyPoints.join("、"),
+          "证据：" + topic.evidence,
+          "扰动：" + topic.whatIf,
+        ].join("\n")}
+        starter={"我已经知道你正在学习“" + topic.name + "”。可以直接问我这个页面里的问题。"}
+      />
       <ExperimentStudio domain={domain} compact />
     </div>
   );
