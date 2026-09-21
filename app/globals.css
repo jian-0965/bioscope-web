@@ -4369,3 +4369,85 @@ a { color: inherit; }
   .cell-explorer-head{display:grid}
   .cell-explorer-head select{width:100%}
 }
+
+
+/* === Asset reliability hotfix 2026-09-21 === */
+.mascot-guide{
+  grid-template-columns:minmax(180px,240px) 1fr !important;
+  min-height:260px !important;
+}
+.mascot-guide.compact{
+  grid-template-columns:170px 1fr !important;
+  min-height:190px !important;
+  max-width:920px !important;
+}
+.mascot-guide-art{
+  min-height:190px;
+  align-self:stretch !important;
+  place-items:center !important;
+  border-radius:22px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#eff9e7,#fbfff8);
+}
+.mascot-guide-art img{
+  width:100% !important;
+  height:100% !important;
+  max-height:none !important;
+  object-fit:cover !important;
+  object-position:center 42% !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  filter:none !important;
+}
+.mascot-guide.compact .mascot-guide-art img{
+  max-height:none !important;
+}
+.floating-mentor-trigger{
+  grid-template-columns:72px auto !important;
+}
+.floating-mentor-trigger img{
+  width:72px !important;
+  height:72px !important;
+  object-fit:cover !important;
+  object-position:center 38% !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  background:#eef8e8 !important;
+}
+.floating-mentor-head{
+  grid-template-columns:88px 1fr !important;
+}
+.floating-mentor-head img{
+  width:88px !important;
+  height:88px !important;
+  object-fit:cover !important;
+  object-position:center 38% !important;
+  border-radius:18px;
+  background:#eef8e8;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+.simple-auth-visual{
+  background-image:
+    linear-gradient(180deg,rgba(15,72,36,.03),rgba(9,55,30,.22)),
+    url("/auth-visual.webp?v=20260921-2"),
+    linear-gradient(160deg,#9bd56d,#5f9c55 60%,#316742) !important;
+  background-position:center center,center center,center center !important;
+  background-size:cover,cover,cover !important;
+  background-repeat:no-repeat !important;
+}
+@media(max-width:820px){
+  .mascot-guide,
+  .mascot-guide.compact{
+    grid-template-columns:150px 1fr !important;
+    min-height:180px !important;
+  }
+}
+@media(max-width:560px){
+  .mascot-guide,
+  .mascot-guide.compact{
+    grid-template-columns:118px 1fr !important;
+    min-height:150px !important;
+  }
+  .mascot-guide-art{min-height:140px}
+}
