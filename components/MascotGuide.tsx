@@ -6,12 +6,12 @@ const mentorMeta = {
   boy: {
     name: "小博",
     role: "机制导师",
-    image: "/mascots/mascot-boy.webp",
+    image: "/mascots/mascot-boy.webp?v=20260921-2",
   },
   girl: {
     name: "小芽",
     role: "学习向导",
-    image: "/mascots/mascot-girl.webp",
+    image: "/mascots/mascot-girl.webp?v=20260921-2",
   },
 } satisfies Record<Mentor, { name: string; role: string; image: string }>;
 
