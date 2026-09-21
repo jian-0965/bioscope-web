@@ -151,7 +151,7 @@ a { color: inherit; }
 .experiment-badge { padding:9px 13px; border-radius:999px; background:#eef2ee; color:#698078; font-size:12px; font-weight:800; white-space:nowrap; }
 .experiment-badge.live { background:#e1f5d6; color:#2f7d5a; box-shadow:0 0 0 7px rgba(86,169,103,.07); }
 .lab-grid.advanced { display:grid; grid-template-columns:.8fr 1.4fr .8fr; gap:18px; margin-top:28px; align-items:stretch; }
-.controls, .voltage-panel, .membrane-sim { border-radius:24px; padding:22px; background:rgba(255,255,255,.72); border:1px solid var(--line); }
+.controls, .voltage-panel, .membrane-sim { border-radius:28px; padding:22px; background:rgba(255,255,255,.72); border:1px solid var(--line); }
 .controls { display:grid; gap:14px; }
 .control-heading { display:flex; align-items:center; gap:8px; font-weight:800; }
 .controls label { display:flex; justify-content:space-between; }
@@ -3552,7 +3552,7 @@ a { color: inherit; }
   overflow:hidden;
   background:
     linear-gradient(180deg,rgba(15,72,36,.03),rgba(9,55,30,.22)),
-    url("/auth/scene-clean.png") center center / cover no-repeat,
+    url("/auth-visual.webp") center center / cover no-repeat,
     linear-gradient(160deg,#9bd56d,#5f9c55 60%,#316742);
 }
 .simple-auth-visual::after{
@@ -3625,7 +3625,7 @@ a { color: inherit; }
   width:100%;
   max-width:390px;
   padding:34px 30px 30px;
-  border:1px solid rgba(48,105,76,.12);
+  border:1px solid rgba(63,114,83,.16);
   border-radius:24px;
   background:rgba(255,255,255,.86);
   box-shadow:
