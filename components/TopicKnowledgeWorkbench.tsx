@@ -29,6 +29,15 @@ export default function TopicKnowledgeWorkbench({
 
   const selected = topic.keyPoints[activePoint] ?? topic.name;
 
+  function answerQuiz(index: number) {
+    setQuizAnswer(index);
+    void fetch("/api/learning-signal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topicKey: domain + ":" + topic.slug, correct: index === 0 }),
+    }).catch(() => undefined);
+  }
+
   return (
     <div className="knowledge-workbench">
       <nav className="knowledge-tabs" aria-label="知识卡类型">
@@ -69,7 +78,7 @@ export default function TopicKnowledgeWorkbench({
           <span className="topic-card-label"><Sparkles size={16}/> 30 秒挑战</span>
           <h2>下面哪一个是“{topic.name}”页面中的核心关键词？</h2>
           <div className="quiz-options">
-            {quizOptions.map((option,index)=><button key={option} className={quizAnswer===index?(index===0?"correct":"wrong"):""} onClick={()=>setQuizAnswer(index)}>{option}</button>)}
+            {quizOptions.map((option,index)=><button key={option} className={quizAnswer===index?(index===0?"correct":"wrong"):""} onClick={()=>answerQuiz(index)}>{option}</button>)}
           </div>
           {quizAnswer!==null && <p>{quizAnswer===0?"回答正确。接下来试着用自己的话解释它与其他关键词的关系。":"再看一次核心知识卡：答案就在本页关键词中。"}</p>}
         </article>
