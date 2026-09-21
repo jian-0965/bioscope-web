@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { makeFallbackAnswer, retrieveBioKnowledge, type BioRagDocument } from "@/lib/ai/bioRag";
+import { createClient } from "@/lib/supabase/server";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -32,6 +33,24 @@ function parseResponseText(data: any): string {
   return parts.join("\n").trim();
 }
 
+async function logInteraction(args: { message: string; answer: string; pageContext: string; sources: { href: string }[]; mode: string }) {
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase.from("ai_interactions").insert({
+      user_id: user.id,
+      page_context: args.pageContext || null,
+      user_message: args.message,
+      assistant_message: args.answer,
+      source_ids: args.sources.map((source) => source.href),
+      mode: args.mode,
+    });
+  } catch {
+    // AI answers should remain usable even if analytics persistence fails.
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -56,8 +75,10 @@ export async function POST(request: Request) {
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
+      const answer = makeFallbackAnswer(message, docs);
+      await logInteraction({ message, answer, pageContext, sources, mode: "rag-fallback" });
       return NextResponse.json({
-        answer: makeFallbackAnswer(message, docs),
+        answer,
         sources,
         mode: "rag-fallback",
         notice: "当前使用 BioScope 本地检索导师；配置模型密钥后会自动启用生成式 AI。",
@@ -98,6 +119,7 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const fallback = makeFallbackAnswer(message, docs);
+      await logInteraction({ message, answer: fallback, pageContext, sources, mode: "rag-fallback" });
       return NextResponse.json({
         answer: fallback,
         sources,
@@ -109,6 +131,7 @@ export async function POST(request: Request) {
     const data = await response.json();
     const answer = parseResponseText(data) || makeFallbackAnswer(message, docs);
 
+    await logInteraction({ message, answer, pageContext, sources, mode: "ai-rag" });
     return NextResponse.json({ answer, sources, mode: "ai-rag" });
   } catch {
     return NextResponse.json({ error: "AI 导师暂时无法处理这个问题，请稍后重试。" }, { status: 500 });
