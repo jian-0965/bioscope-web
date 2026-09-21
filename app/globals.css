@@ -4184,3 +4184,188 @@ a { color: inherit; }
   .experiment-studio-head{display:grid}
   .lab-domain-picker{grid-template-columns:1fr}
 }
+
+
+/* === Immune battle lab === */
+.immune-lab{
+  width:min(1180px,calc(100% - 32px));
+  margin:28px auto 0;
+  display:grid;
+  gap:18px;
+}
+.immune-lab-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+}
+.immune-lab-head h2{margin:10px 0 8px;color:#193d2d}
+.immune-lab-head p{margin:0;color:#6d7e75;line-height:1.7}
+.immune-mode-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.immune-mode-tabs button{
+  min-height:40px;padding:0 14px;border:1px solid #d9e4db;border-radius:11px;background:#fff;color:#587066;font-weight:850;cursor:pointer;
+}
+.immune-mode-tabs button.active{background:#e8f4e9;border-color:#67a079;color:#205c3e}
+.immune-arena{
+  border:1px solid rgba(48,100,70,.12);
+  border-radius:24px;
+  background:#fff;
+  overflow:hidden;
+}
+.immune-toolbar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:14px 16px;border-bottom:1px solid #edf1ee;background:#fbfdfb;
+}
+.immune-toolbar button{
+  display:flex;align-items:center;gap:6px;
+  min-height:36px;padding:0 11px;border:1px solid #dbe5de;border-radius:10px;background:#fff;color:#49665a;font-size:11px;font-weight:850;cursor:pointer;
+}
+.immune-toolbar button:first-child{background:#2e7a52;border-color:#2e7a52;color:#fff}
+.immune-toolbar span{margin-left:auto;color:#74837b;font-size:11px;font-weight:800}
+.immune-scene{
+  position:relative;
+  height:390px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(218,242,216,.8),transparent 30%),
+    linear-gradient(180deg,#f8fcf8,#edf6ef);
+}
+.tissue-grid{
+  position:absolute;inset:0;opacity:.35;
+  background-image:radial-gradient(circle at center,rgba(92,145,105,.18) 0 1px,transparent 1.5px);
+  background-size:26px 26px;
+}
+.pathogen{
+  position:absolute;
+  width:24px;height:12px;border-radius:999px;
+  background:#e39b6d;border:2px solid #c8734b;
+  box-shadow:0 0 0 4px rgba(227,155,109,.12);
+  transition:transform 1s ease,opacity .6s ease,left 1s ease,top 1s ease;
+}
+.pathogen i{position:absolute;width:4px;height:4px;border-radius:50%;background:#8b4c32;top:2px}
+.pathogen i:nth-child(1){left:4px}.pathogen i:nth-child(2){left:10px}.pathogen i:nth-child(3){left:16px}
+.pathogen-0{left:8%;top:24%}.pathogen-1{left:15%;top:60%}.pathogen-2{left:24%;top:39%}.pathogen-3{left:12%;top:78%}.pathogen-4{left:29%;top:18%}.pathogen-5{left:31%;top:71%}
+.immune-cell{
+  position:absolute;
+  width:72px;height:72px;border-radius:50%;
+  display:grid;place-items:center;
+  border:3px solid rgba(83,132,93,.7);
+  background:radial-gradient(circle at 32% 28%,#f8fff5,#cfe7ca 68%,#a7ca9f);
+  box-shadow:0 10px 26px rgba(52,94,63,.12);
+  transition:left 1s ease,top 1s ease,transform .7s ease,opacity .5s ease;
+}
+.immune-cell span{font-size:11px;font-weight:900;color:#315e43}
+.macrophage{left:28%;top:45%}
+.dendritic{left:42%;top:18%;background:radial-gradient(circle at 32% 28%,#fff,#d8ebc9 68%,#accb9e)}
+.helper-t{left:53%;top:42%;background:radial-gradient(circle at 32% 28%,#fff,#e2def4 68%,#bdb2d8)}
+.b-cell{left:68%;top:20%;background:radial-gradient(circle at 32% 28%,#fff,#d9e9f4 68%,#acc9df)}
+.plasma-cell{left:78%;top:54%;background:radial-gradient(circle at 32% 28%,#fff,#ece2f6 68%,#c6afd8)}
+.killer-t{left:70%;top:28%;background:radial-gradient(circle at 32% 28%,#fff,#eadcf1 68%,#c8afd1)}
+.infected-cell{
+  position:absolute;right:7%;bottom:16%;width:104px;height:84px;border-radius:40% 55% 45% 52%;
+  display:grid;place-items:center;background:#f5d9d5;border:3px solid #c98b83;color:#7d4d49;font-size:11px;font-weight:900;
+  transition:transform .7s ease,opacity .5s ease,filter .5s ease;
+}
+.antibody{
+  position:absolute;font-weight:900;font-size:24px;color:#3f8e72;opacity:0;transition:all .7s ease;
+}
+.antibody-0{left:74%;top:26%}.antibody-1{left:80%;top:31%}.antibody-2{left:84%;top:42%}.antibody-3{left:73%;top:64%}.antibody-4{left:88%;top:56%}.antibody-5{left:80%;top:72%}.antibody-6{left:68%;top:74%}
+.death-burst{position:absolute;right:10%;bottom:26%;font-size:58px;color:#d38872;opacity:0;transform:scale(.4);transition:.6s ease}
+.immune-flow-line{position:absolute;left:31%;right:14%;top:50%;height:2px;background:linear-gradient(90deg,rgba(74,128,90,.1),rgba(74,128,90,.35),rgba(74,128,90,.08));opacity:.4}
+
+/* step-driven motion */
+.immune-scene.step-1 .macrophage{left:18%;top:44%;transform:scale(1.08)}
+.immune-scene.step-1 .pathogen{transform:translateX(25px);opacity:.85}
+.immune-scene.step-2 .dendritic{left:48%;top:30%;transform:scale(1.08)}
+.immune-scene.step-2 .helper-t{left:56%;top:38%;transform:scale(1.08)}
+.immune-scene.step-3 .helper-t{transform:scale(1.18)}
+.immune-scene.step-3 .b-cell,.immune-scene.step-3 .killer-t{left:62%;top:38%;transform:scale(1.14)}
+.immune-scene.step-4 .plasma-cell{left:73%;top:43%;transform:scale(1.12)}
+.immune-scene.mode-cellular.step-4 .killer-t{left:77%;top:44%;transform:scale(1.15)}
+.immune-scene.mode-cellular.step-5 .killer-t{left:82%;top:53%;transform:scale(1.05)}
+.immune-scene.mode-cellular.step-5 .infected-cell{filter:saturate(.5);transform:scale(.92)}
+.immune-scene.mode-cellular.step-5 .death-burst{opacity:1;transform:scale(1.1)}
+.immune-scene.mode-cellular.step-6 .infected-cell{opacity:.3;transform:scale(.7)}
+.immune-scene.mode-humoral.step-5 .antibody,
+.immune-scene.mode-humoral.step-6 .antibody{opacity:1}
+.immune-scene.mode-humoral.step-5 .pathogen,
+.immune-scene.mode-humoral.step-6 .pathogen{opacity:.42;transform:scale(.8)}
+.immune-timeline{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;padding:14px 16px;border-top:1px solid #edf1ee;background:#fbfdfb;
+}
+.immune-timeline button{
+  display:grid;justify-items:center;gap:5px;padding:9px 5px;border:0;border-radius:11px;background:transparent;color:#7c8a83;font-size:9px;cursor:pointer;
+}
+.immune-timeline button b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#edf3ee;color:#688070}
+.immune-timeline button.active{background:#eaf5eb;color:#235e3f}
+.immune-timeline button.active b,.immune-timeline button.done b{background:#4b8f63;color:#fff}
+.immune-readout{
+  display:grid;grid-template-columns:1.4fr .6fr;gap:14px;padding:18px 20px;border-top:1px solid #edf1ee;
+}
+.immune-readout>div:first-child{display:grid;grid-template-columns:22px auto;column-gap:8px}
+.immune-readout>div:first-child>span{font-size:10px;color:#819087}
+.immune-readout>div:first-child>strong{grid-column:2;color:#24583d}
+.immune-readout>div:first-child>p{grid-column:2;margin:5px 0 0;color:#697a71;font-size:12px;line-height:1.55}
+.immune-clear{display:grid;grid-template-columns:1fr auto;gap:6px;align-content:center}
+.immune-clear span{font-size:10px;color:#7f8d85}.immune-clear b{color:#2a6546}
+.immune-clear>div{grid-column:1/-1;height:9px;border-radius:999px;background:#e7eee8;overflow:hidden}
+.immune-clear i{display:block;height:100%;background:linear-gradient(90deg,#9bcd6e,#3e865b);border-radius:inherit;transition:width .4s ease}
+
+/* === Cell structure explorer === */
+.cell-explorer{
+  border:1px solid rgba(48,100,70,.12);
+  border-radius:24px;
+  background:#fff;
+  overflow:hidden;
+}
+.cell-explorer-head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:22px 24px;border-bottom:1px solid #edf1ee;
+}
+.cell-explorer-head>div>span{display:flex;align-items:center;gap:6px;color:#4f7d60;font-size:10px;font-weight:900;letter-spacing:.08em}
+.cell-explorer-head h2{margin:8px 0 6px;color:#193d2d}
+.cell-explorer-head p{margin:0;color:#718178;font-size:12px}
+.cell-explorer-head select{min-width:170px;height:40px;border:1px solid #dce5df;border-radius:10px;background:#fff;color:#365947;padding:0 10px;font-weight:800}
+.cell-explorer-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:0}
+.cell-model-stage{padding:24px;background:linear-gradient(180deg,#fbfefb,#f3f8f3)}
+.cell-model-title{display:flex;align-items:baseline;gap:10px}
+.cell-model-title strong{font-size:18px;color:#234f38}.cell-model-title span{font-size:10px;color:#87948d}
+.cell-model-graphic{position:relative;width:min(100%,520px);aspect-ratio:1.35;margin:16px auto}
+.cell-model-graphic>svg{width:100%;height:100%;filter:drop-shadow(0 16px 22px rgba(41,88,54,.08))}
+.cell-model-stage>p{margin:0;color:#687970;line-height:1.65;font-size:12px}
+.cell-hotspot{
+  position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);
+  display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.88);box-shadow:0 0 0 2px #4d9466,0 0 0 8px rgba(77,148,102,.12);cursor:pointer;
+}
+.cell-hotspot span{width:8px;height:8px;border-radius:50%;background:#4d9466}
+.cell-hotspot.active{box-shadow:0 0 0 3px #245e40,0 0 0 11px rgba(77,148,102,.18);transform:translate(-50%,-50%) scale(1.12)}
+.cell-hotspot-card{padding:26px;border-left:1px solid #edf1ee}
+.cell-hotspot-card h3{margin:12px 0 8px;color:#173c2d;font-size:25px}
+.cell-hotspot-card>strong{display:block;color:#3c6c50;font-size:13px}
+.cell-hotspot-card>p{color:#6a7a72;line-height:1.75;font-size:12px}
+.hotspot-tip{display:flex;gap:7px;align-items:center;margin-top:18px;padding:11px;border-radius:12px;background:#f1f7f1;color:#547362;font-size:10px}
+.topic-special-explorers{width:min(1180px,calc(100% - 32px));margin:26px auto 0;display:grid;gap:18px}
+
+/* standalone cell library */
+.cells-page{min-height:100vh;background:linear-gradient(180deg,#f5fbf3,#eef7f1 45%,#f8fbf8)}
+.cells-hero{width:min(1120px,calc(100% - 32px));margin:0 auto;padding:52px 0 30px}
+.cells-hero h1{margin:12px 0 10px;color:#163b2b;font-size:clamp(38px,6vw,72px);letter-spacing:-.05em}
+.cells-hero>p{max-width:760px;color:#64786d;line-height:1.8}
+.cells-page-section{width:min(1120px,calc(100% - 32px));margin:0 auto 26px}
+.cells-section-title{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:#315f45}
+.cells-section-title>div{display:grid}.cells-section-title strong{font-size:16px}.cells-section-title span{font-size:11px;color:#7b8981}
+
+@media(max-width:900px){
+  .immune-lab-head{display:grid}
+  .immune-timeline{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .immune-readout{grid-template-columns:1fr}
+  .cell-explorer-body{grid-template-columns:1fr}
+  .cell-hotspot-card{border-left:0;border-top:1px solid #edf1ee}
+}
+@media(max-width:620px){
+  .immune-scene{height:320px}
+  .immune-cell{width:58px;height:58px}
+  .immune-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .immune-toolbar span{width:100%;margin-left:0}
+  .cell-explorer-head{display:grid}
+  .cell-explorer-head select{width:100%}
+}
