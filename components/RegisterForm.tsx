@@ -47,56 +47,71 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="scene-form-wrap">
-      <form className="scene-form" onSubmit={submit}>
-        <label className="scene-field">
-          <Mail size={20} />
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="邮箱地址"
-            autoComplete="email"
-            required
-          />
+    <div className="simple-auth-form-wrap">
+      <form className="simple-auth-form" onSubmit={submit}>
+        <label className="simple-auth-field">
+          <span className="simple-auth-field-label">邮箱</span>
+          <div className="simple-auth-input-shell">
+            <Mail size={19} />
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="请输入邮箱"
+              autoComplete="email"
+              required
+            />
+          </div>
         </label>
-        <p className="scene-field-help">请输入有效的邮箱地址</p>
 
-        <label className="scene-field">
-          <UserRound size={20} />
-          <input
-            type="text"
-            value={displayName}
-            onChange={(event) => setDisplayName(event.target.value)}
-            placeholder="用户名"
-            autoComplete="name"
-          />
+        <label className="simple-auth-field">
+          <span className="simple-auth-field-label">用户名</span>
+          <div className="simple-auth-input-shell">
+            <UserRound size={19} />
+            <input
+              type="text"
+              value={displayName}
+              onChange={(event) => setDisplayName(event.target.value)}
+              placeholder="请输入用户名"
+              autoComplete="name"
+            />
+          </div>
         </label>
-        <p className="scene-field-help">设置一个你喜欢的用户名</p>
 
-        <label className="scene-field">
-          <LockKeyhole size={20} />
-          <input
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="密码"
-            minLength={8}
-            autoComplete="new-password"
-            required
-          />
-          <button type="button" className="scene-eye" onClick={() => setShowPassword((value) => !value)} aria-label="切换密码显示">
-            {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
-          </button>
+        <label className="simple-auth-field">
+          <span className="simple-auth-field-label">密码</span>
+          <div className="simple-auth-input-shell">
+            <LockKeyhole size={19} />
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="至少 8 个字符"
+              minLength={8}
+              autoComplete="new-password"
+              required
+            />
+            <button
+              type="button"
+              className="simple-auth-eye"
+              onClick={() => setShowPassword((value) => !value)}
+              aria-label="切换密码显示"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
         </label>
-        <p className="scene-field-help">至少 8 个字符，建议包含字母和数字</p>
 
-        <label className="scene-check scene-terms">
-          <input type="checkbox" checked={accepted} onChange={(event) => setAccepted(event.target.checked)} />
+        <label className="simple-auth-check simple-auth-terms">
+          <input
+            type="checkbox"
+            checked={accepted}
+            onChange={(event) => setAccepted(event.target.checked)}
+          />
           <span>我已阅读并同意 <a href="#">服务条款</a> 和 <a href="#">隐私政策</a></span>
         </label>
 
-        <button className="scene-submit" disabled={loading}>
+        <button className="simple-auth-submit" disabled={loading}>
           {loading ? "正在创建账户…" : "注册"}
           <span>→</span>
         </button>
@@ -104,8 +119,8 @@ export default function RegisterForm() {
 
       {message && <p className="register-message" role="status">{message}</p>}
 
-      <div className="scene-divider"><span>已有账号？</span></div>
-      <a className="scene-secondary-action" href="/auth">登录</a>
+      <div className="simple-auth-divider"><span>已有账号？</span></div>
+      <a className="simple-auth-secondary" href="/auth">登录</a>
     </div>
   );
 }
