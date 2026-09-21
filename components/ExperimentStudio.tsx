@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Beaker, BrainCircuit, CheckCircle2, RotateCcw, SlidersHorizontal } from "lucide-react";
+import AIMentorChat from "@/components/AIMentorChat";
 
 type ExperimentPreset = {
   domain: string;
@@ -162,6 +163,19 @@ export default function ExperimentStudio({ domain, compact = false }: { domain: 
         </div>
       </div>
       <p className="experiment-disclaimer">教学简化模型：用于理解变量关系和趋势，不代表真实实验的精确数值。</p>
+      {observed && (
+        <AIMentorChat
+          compact
+          experimentContext={[
+            "实验：" + preset.title,
+            preset.variableA + "：" + a + preset.unitA,
+            preset.variableB + "：" + b + preset.unitB,
+            "观察结果：" + result.value + " " + result.label,
+            "模型解释：" + result.note,
+          ].join("\n")}
+          starter="实验已经运行完成。你可以问我为什么会得到这个结果，或者真实实验里还会受到哪些因素影响。"
+        />
+      )}
     </section>
   );
 }
