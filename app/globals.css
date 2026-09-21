@@ -3857,3 +3857,330 @@ a { color: inherit; }
     border-radius:20px;
   }
 }
+
+
+/* === Interactive topic knowledge workbench === */
+.knowledge-workbench{
+  width:min(1180px,calc(100% - 32px));
+  margin:28px auto 0;
+  display:grid;
+  gap:20px;
+}
+.knowledge-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:10px;
+  border:1px solid rgba(43,93,65,.1);
+  border-radius:18px;
+  background:rgba(255,255,255,.8);
+}
+.knowledge-tabs button{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:42px;
+  padding:0 14px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  color:#597066;
+  font-size:12px;
+  font-weight:850;
+  cursor:pointer;
+}
+.knowledge-tabs button.active{
+  background:#e9f5ea;
+  color:#205b3e;
+}
+.interactive-knowledge-card{
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  gap:18px;
+}
+.knowledge-point-list{
+  display:grid;
+  gap:8px;
+  align-content:start;
+}
+.knowledge-point-list button{
+  display:grid;
+  grid-template-columns:38px 1fr;
+  gap:10px;
+  align-items:center;
+  min-height:56px;
+  padding:8px 12px;
+  border:1px solid rgba(50,100,72,.11);
+  border-radius:14px;
+  background:#fff;
+  color:#476056;
+  text-align:left;
+  cursor:pointer;
+}
+.knowledge-point-list button b{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:#f0f6ef;
+  color:#568262;
+  font-size:11px;
+}
+.knowledge-point-list button span{font-weight:800}
+.knowledge-point-list button.active{
+  border-color:#5b9a70;
+  background:#edf7ed;
+  color:#1f5b3e;
+}
+.knowledge-point-detail,
+.knowledge-single-panel,
+.knowledge-quiz,
+.experiment-studio,
+.lab-domain-intro,
+.lab-topic-links{
+  border:1px solid rgba(49,99,72,.12);
+  border-radius:22px;
+  background:#fff;
+}
+.knowledge-point-detail{padding:26px}
+.knowledge-point-detail h2,
+.knowledge-single-panel h2,
+.knowledge-quiz h2,
+.experiment-studio h2,
+.lab-domain-intro h2{margin:10px 0 10px;color:#193d2d}
+.knowledge-point-detail>p,
+.knowledge-single-panel p,
+.experiment-studio-head p,
+.lab-domain-intro p{color:#66796f;line-height:1.75}
+.knowledge-explain-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+.knowledge-explain-grid>div{
+  display:grid;
+  gap:7px;
+  padding:16px;
+  border-radius:16px;
+  background:#f6faf6;
+  color:#365d48;
+}
+.knowledge-explain-grid span{font-size:12px;line-height:1.6;color:#718178}
+.knowledge-single-panel{
+  display:grid;
+  grid-template-columns:50px minmax(0,1fr);
+  gap:16px;
+  padding:26px;
+}
+.knowledge-single-panel>svg{
+  width:42px;
+  height:42px;
+  padding:9px;
+  border-radius:13px;
+  background:#eef6ec;
+  color:#347653;
+}
+.knowledge-single-panel>div>span{
+  color:#6d907b;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.knowledge-single-panel small{color:#829087;line-height:1.5}
+.connection-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.connection-chips span{
+  padding:7px 10px;
+  border-radius:999px;
+  background:#eef6ef;
+  color:#407055;
+  font-size:11px;
+  font-weight:800;
+}
+.knowledge-quiz{padding:26px}
+.quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.quiz-options button{
+  min-height:48px;
+  border:1px solid #dfe7e1;
+  border-radius:12px;
+  background:#fff;
+  color:#425b4e;
+  font-weight:800;
+  cursor:pointer;
+}
+.quiz-options button.correct{border-color:#4b9163;background:#e9f6eb;color:#245e3d}
+.quiz-options button.wrong{border-color:#c58b8b;background:#fff1f1;color:#874545}
+.knowledge-quiz>p{margin-top:14px;color:#62766b}
+
+/* === Experiment studio === */
+.experiment-studio{padding:24px}
+.experiment-studio.compact{margin-top:0}
+.experiment-studio-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+}
+.experiment-reset{
+  display:flex;align-items:center;gap:6px;
+  border:1px solid #dbe5dd;
+  background:#fff;
+  color:#557064;
+  border-radius:10px;
+  padding:9px 11px;
+  cursor:pointer;
+}
+.experiment-cycle{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr 1fr;
+  gap:14px;
+  margin-top:20px;
+}
+.experiment-predict,
+.experiment-controls,
+.experiment-result{
+  padding:18px;
+  border-radius:17px;
+  background:#f7faf7;
+  min-width:0;
+}
+.experiment-predict>strong,
+.experiment-controls>strong,
+.experiment-result>strong{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#2c6246;
+  margin-bottom:12px;
+}
+.experiment-predict>span{display:block;color:#75857c;font-size:12px;margin-bottom:12px}
+.experiment-predict>div{display:flex;flex-wrap:wrap;gap:7px}
+.experiment-predict button{
+  border:1px solid #d6e3d8;
+  background:#fff;
+  border-radius:10px;
+  padding:9px 11px;
+  color:#53685d;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+.experiment-predict button.active{background:#e7f4e8;border-color:#64a278;color:#235e3d}
+.experiment-controls label{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  margin:12px 0;
+  color:#51685c;
+  font-size:12px;
+  font-weight:750;
+}
+.experiment-controls input{grid-column:1/-1;width:100%;accent-color:#3f865c}
+.experiment-run{
+  width:100%;
+  min-height:42px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(100deg,#72b75e,#23724b);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.experiment-meter{
+  height:12px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e6eee7;
+  margin:14px 0 10px;
+}
+.experiment-meter span{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#a1d36c,#2f7a53);
+  transition:width .35s ease;
+}
+.experiment-score{display:flex;align-items:end;gap:8px}
+.experiment-score b{font-size:34px;color:#1c5136}
+.experiment-score span{padding-bottom:5px;color:#738079;font-size:11px}
+.experiment-result p{color:#687b70;font-size:12px;line-height:1.6}
+.experiment-result small{display:flex;gap:6px;color:#44775b;margin-top:10px}
+.experiment-disclaimer{margin:14px 0 0;color:#88958e;font-size:10px}
+
+/* === All labs === */
+.all-labs-shell{
+  width:min(1200px,calc(100% - 32px));
+  margin:28px auto 70px;
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  gap:18px;
+}
+.lab-domain-picker{
+  display:grid;
+  align-content:start;
+  gap:8px;
+  padding:14px;
+  border:1px solid rgba(49,99,72,.11);
+  border-radius:20px;
+  background:#fff;
+}
+.lab-domain-picker>span{
+  padding:8px 7px 12px;
+  color:#708178;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.lab-domain-picker button{
+  display:grid;
+  grid-template-columns:32px 1fr;
+  align-items:center;
+  gap:9px;
+  min-height:54px;
+  padding:8px 10px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  color:#496055;
+  text-align:left;
+  cursor:pointer;
+}
+.lab-domain-picker button.active{background:#eaf5ea;color:#205a3d}
+.lab-domain-picker button b{font-size:21px}
+.lab-domain-picker button span{display:grid;gap:1px}
+.lab-domain-picker button strong{font-size:12px}
+.lab-domain-picker button small{font-size:9px;color:#8a968f}
+.lab-domain-stage{display:grid;gap:16px}
+.lab-domain-intro{padding:24px}
+.lab-domain-intro>span{font-size:12px;font-weight:900;color:#557e64}
+.lab-topic-links{padding:20px}
+.lab-topic-links>strong{color:#2b5840}
+.lab-topic-links>div{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.lab-topic-links a{
+  padding:8px 10px;
+  border-radius:999px;
+  background:#eef6ef;
+  color:#35684b;
+  font-size:11px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+@media(max-width:900px){
+  .interactive-knowledge-card{grid-template-columns:1fr}
+  .knowledge-point-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .knowledge-explain-grid{grid-template-columns:1fr}
+  .experiment-cycle{grid-template-columns:1fr}
+  .all-labs-shell{grid-template-columns:1fr}
+  .lab-domain-picker{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lab-domain-picker>span{grid-column:1/-1}
+}
+@media(max-width:560px){
+  .knowledge-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .knowledge-tabs button{justify-content:center;padding:0 8px}
+  .knowledge-point-list{grid-template-columns:1fr}
+  .quiz-options{grid-template-columns:1fr}
+  .experiment-studio-head{display:grid}
+  .lab-domain-picker{grid-template-columns:1fr}
+}
