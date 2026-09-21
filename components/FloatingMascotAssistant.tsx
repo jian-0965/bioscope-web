@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { BookOpen, FlaskConical, Map, Route, Sparkles, X } from "lucide-react";
+import MascotAvatar from "@/components/MascotAvatar";
 import { usePathname } from "next/navigation";
 
 const routeHints = {
@@ -10,21 +11,18 @@ const routeHints = {
     mentor: "boy" as const,
     name: "小博",
     role: "机制导师",
-    image: "/mascots/mascot-boy.webp?v=20260921-2",
     text: "实验前先做预测，再改变一个变量。这样你看到的结果才真正有意义。",
   },
   topic: {
     mentor: "boy" as const,
     name: "小博",
     role: "机制导师",
-    image: "/mascots/mascot-boy.webp?v=20260921-2",
     text: "先抓住关键词，再问“如果这里失效，会发生什么？”——这是理解机制最快的方法。",
   },
   general: {
     mentor: "girl" as const,
     name: "小芽",
     role: "学习向导",
-    image: "/mascots/mascot-girl.webp?v=20260921-2",
     text: "不知道从哪里开始也没关系。我可以带你从生物学全景或推荐路线开始。",
   },
 };
@@ -53,7 +51,7 @@ export default function FloatingMascotAssistant() {
             <X size={16} />
           </button>
           <div className="floating-mentor-head">
-            <img src={hint.image} alt={hint.name} />
+            <MascotAvatar mentor={hint.mentor} className="floating-mentor-avatar" />
             <div>
               <strong>{hint.name}</strong>
               <span>{hint.role}</span>
@@ -71,7 +69,7 @@ export default function FloatingMascotAssistant() {
       )}
 
       <button className="floating-mentor-trigger" onClick={() => setOpen((value) => !value)} aria-label="打开 BioScope 学习助手">
-        <img src={hint.image} alt="" />
+        <MascotAvatar mentor={hint.mentor} className="floating-mentor-avatar" />
         <span>{open ? "收起" : "问问 " + hint.name}</span>
       </button>
     </div>
