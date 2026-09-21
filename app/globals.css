@@ -4451,3 +4451,33 @@ a { color: inherit; }
   }
   .mascot-guide-art{min-height:140px}
 }
+
+
+/* === Mascot vector fallback: critical IP no longer depends on image files === */
+.mascot-vector{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:180px;
+  overflow:visible;
+}
+.mascot-guide-art{
+  background:linear-gradient(145deg,#f2faeb,#fbfff8) !important;
+}
+.floating-mentor-avatar{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+}
+.floating-mentor-trigger .floating-mentor-avatar{
+  width:72px !important;
+  height:72px !important;
+  border-radius:50%;
+  background:linear-gradient(145deg,#eaf8dd,#f9fff6);
+}
+.floating-mentor-head .floating-mentor-avatar{
+  width:88px !important;
+  height:88px !important;
+  border-radius:18px;
+  background:#eef8e8;
+}
