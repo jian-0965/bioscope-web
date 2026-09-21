@@ -12,7 +12,7 @@ export type CellModel = {
   name: string;
   en: string;
   category: "cell" | "immune" | "organelle";
-  kind: "animal" | "plant" | "bacterium" | "macrophage" | "dendritic" | "bcell" | "tcell" | "plasma" | "neutrophil" | "mitochondrion" | "chloroplast" | "neuron";
+  kind: "animal" | "plant" | "bacterium" | "macrophage" | "dendritic" | "bcell" | "tcell" | "plasma" | "neutrophil" | "mitochondrion" | "chloroplast" | "nucleus" | "er" | "golgi" | "lysosome" | "ribosome" | "neuron";
   description: string;
   hotspots: CellHotspot[];
 };
