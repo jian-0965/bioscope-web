@@ -52,7 +52,7 @@ export default function FloatingMascotAssistant() {
             <X size={16} />
           </button>
           <div className="floating-mentor-head">
-            <MascotAvatar mentor={hint.mentor} className="floating-mentor-avatar" />
+            <MascotAvatar mentor={hint.mentor} portrait className="floating-mentor-avatar" />
             <div>
               <strong>{hint.name}</strong>
               <span>{hint.role}</span>
@@ -70,7 +70,7 @@ export default function FloatingMascotAssistant() {
       )}
 
       <button className="floating-mentor-trigger" onClick={() => setOpen((value) => !value)} aria-label="打开 BioScope 学习助手">
-        <MascotAvatar mentor={hint.mentor} className="floating-mentor-avatar" />
+        <MascotAvatar mentor={hint.mentor} portrait className="floating-mentor-avatar" />
         <span>{open ? "收起" : "问问 " + hint.name}</span>
       </button>
     </div>
