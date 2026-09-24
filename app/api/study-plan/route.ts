@@ -38,7 +38,6 @@ function makePlan(input: Required<RequestBody>) {
       ],
     };
   });
-
   return {
     title: input.daysPerWeek + " 天 " + (goals[input.goal] || goals.foundations) + "计划",
     summary: "每天约 " + input.minutesPerDay + " 分钟，按“理解 → 解释 → 练习 → 回顾”的节奏完成。" + (input.note ? " 本周重点：" + input.note : ""),
@@ -52,16 +51,13 @@ function makePlan(input: Required<RequestBody>) {
 async function improveWithGemini(fallback: ReturnType<typeof makePlan>, input: Required<RequestBody>) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return fallback;
-
   const prompt = [
     "你是 BioScope 的生命科学学习计划教练。只输出 JSON，不要额外文字。",
     "保留 title、summary、focus、sessions、habits 字段；sessions 必须有 " + input.daysPerWeek + " 天，每天约 " + input.minutesPerDay + " 分钟。",
     "学习目标：" + (goals[input.goal] || goals.foundations),
     "用户补充：" + (input.note || "无"),
     "本地草案：" + JSON.stringify(fallback),
-  ].join("
-");
-
+  ].join(" ");
   try {
     const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(apiKey), {
