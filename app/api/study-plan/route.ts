@@ -172,14 +172,22 @@ async function improveWithDoubao(fallback: StudyPlan, input: Required<RequestBod
         messages: [{ role: "system", content: system }, { role: "user", content: user }],
         temperature: 0.55,
         max_tokens: 2200,
+        thinking: { type: "disabled" },
+        response_format: { type: "json_object" },
       }),
       signal: AbortSignal.timeout(25_000),
     });
-    if (!response.ok) return fallback;
+    if (!response.ok) {
+      console.warn("Doubao study-plan request failed", response.status, (await response.text()).slice(0, 320));
+      return fallback;
+    }
     const payload = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
     const text = payload.choices?.[0]?.message?.content || "";
-    return normalizePlan(getJsonObject(text), fallback, input) ?? fallback;
-  } catch {
+    const plan = normalizePlan(getJsonObject(text), fallback, input);
+    if (!plan) console.warn("Doubao study-plan response did not match the required plan shape");
+    return plan ?? fallback;
+  } catch (error) {
+    console.warn("Doubao study-plan request failed", error instanceof Error ? error.message : "unknown error");
     return fallback;
   }
 }
