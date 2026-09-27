@@ -80,6 +80,7 @@ BioScope 是一个以“尺度探索 + 思维导图 + 互动实验 + 科学史 +
 ├─ /challenges
 ├─ /glossary
 ├─ /paths
+├─ /ai
 ├─ /auth
 ├─ /register
 └─ /dashboard
@@ -108,9 +109,11 @@ npm run dev
 ```env
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+ARK_API_KEY=...
+DOUBAO_MODEL=doubao-seed-2-0-lite-260215
 ```
 
-不要把 service role key 或其他 secret 放进前端。
+学习计划会优先使用火山方舟的豆包模型；未配置 `ARK_API_KEY` 时，网站仍会提供按目标、领域、学习阶段和时间生成的本地学习草案。`ARK_API_KEY`、service role key 或其他 secret 都不能放进前端。
 
 ## 产品原则
 

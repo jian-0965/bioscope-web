@@ -4,10 +4,12 @@ import { FormEvent, useState } from "react";
 import { CalendarDays, CheckCircle2, Clock3, LoaderCircle, Sparkles, Target } from "lucide-react";
 
 type PlanSession = { day: string; title: string; topic: string; tasks: string[] };
-type StudyPlan = { title: string; summary: string; focus: string[]; sessions: PlanSession[]; habits: string[]; mode: "gemini" | "local" };
+type StudyPlan = { title: string; summary: string; focus: string[]; sessions: PlanSession[]; habits: string[]; mode: "doubao" | "local" };
 
 export default function StudyPlanBuilder() {
   const [goal, setGoal] = useState("foundations");
+  const [focusArea, setFocusArea] = useState("all");
+  const [level, setLevel] = useState("beginner");
   const [daysPerWeek, setDaysPerWeek] = useState("4");
   const [minutesPerDay, setMinutesPerDay] = useState("30");
   const [note, setNote] = useState("");
@@ -23,7 +25,7 @@ export default function StudyPlanBuilder() {
       const response = await fetch("/api/study-plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ goal, daysPerWeek: Number(daysPerWeek), minutesPerDay: Number(minutesPerDay), note }),
+        body: JSON.stringify({ goal, focusArea, level, daysPerWeek: Number(daysPerWeek), minutesPerDay: Number(minutesPerDay), note }),
       });
       const data = await response.json();
       if (!response.ok || !data.plan) throw new Error(data.error || "计划生成失败");
@@ -48,6 +50,18 @@ export default function StudyPlanBuilder() {
             </select>
           </label>
           <div className="study-plan-fields">
+            <label><span>学习领域</span>
+              <select value={focusArea} onChange={(event) => setFocusArea(event.target.value)}>
+                <option value="all">综合生命科学</option><option value="cell">细胞与分子</option><option value="human">人体与健康</option><option value="genetics">遗传与进化</option><option value="ecology">生态与环境</option>
+              </select>
+            </label>
+            <label><span>当前阶段</span>
+              <select value={level} onChange={(event) => setLevel(event.target.value)}>
+                <option value="beginner">刚开始学习</option><option value="learning">正在学习</option><option value="review">考前复习</option>
+              </select>
+            </label>
+          </div>
+          <div className="study-plan-fields">
             <label><span><CalendarDays size={14} /> 每周天数</span>
               <select value={daysPerWeek} onChange={(event) => setDaysPerWeek(event.target.value)}>{[2,3,4,5,6,7].map((value) => <option key={value} value={value}>{value} 天</option>)}</select>
             </label>
@@ -62,7 +76,7 @@ export default function StudyPlanBuilder() {
       </div>
 
       {plan && <section className="study-plan-result" aria-live="polite">
-        <div className="study-plan-result-head"><div><span>{plan.mode === "gemini" ? "AI 已优化" : "免费智能排程"}</span><h2>{plan.title}</h2><p>{plan.summary}</p></div></div>
+        <div className="study-plan-result-head"><div><span>{plan.mode === "doubao" ? "豆包 AI 已生成" : "智能学习草案"}</span><h2>{plan.title}</h2><p>{plan.summary}</p></div></div>
         <div className="study-plan-focus"><b>本周重点</b>{plan.focus.map((item) => <span key={item}>{item}</span>)}</div>
         <div className="study-plan-sessions">{plan.sessions.map((session) => <article key={session.day}><span>{session.day}</span><h3>{session.title}</h3><p>{session.topic}</p><ol>{session.tasks.map((task) => <li key={task}>{task}</li>)}</ol></article>)}</div>
         <div className="study-plan-habits"><CheckCircle2 size={17} /><div><b>保持节奏</b>{plan.habits.map((habit) => <span key={habit}>{habit}</span>)}</div></div>
