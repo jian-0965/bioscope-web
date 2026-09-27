@@ -154,6 +154,33 @@ async function improveWithDoubao(fallback: StudyPlan, input: Required<RequestBod
     "计划必须根据学习目标、领域、水平、每天时长、用户补充进行差异化安排。不要连续安排相同主题；不要杜撰事实、考试范围或外部资料。",
     "每一天的任务总时长要接近 " + input.minutesPerDay + " 分钟；要加入主动回忆、练习或复盘，而不是只写“阅读”。",
   ].join("\n");
+  const planSchema = {
+    type: "object",
+    additionalProperties: false,
+    required: ["title", "summary", "focus", "sessions", "habits"],
+    properties: {
+      title: { type: "string" },
+      summary: { type: "string" },
+      focus: { type: "array", minItems: 1, maxItems: 4, items: { type: "string" } },
+      sessions: {
+        type: "array",
+        minItems: input.daysPerWeek,
+        maxItems: input.daysPerWeek,
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: ["day", "title", "topic", "tasks"],
+          properties: {
+            day: { type: "string" },
+            title: { type: "string" },
+            topic: { type: "string" },
+            tasks: { type: "array", minItems: 2, maxItems: 4, items: { type: "string" } },
+          },
+        },
+      },
+      habits: { type: "array", minItems: 1, maxItems: 4, items: { type: "string" } },
+    },
+  };
   const user = [
     "学习目标：" + (goals[input.goal] || goals.foundations),
     "学习领域：" + (focusAreas[input.focusArea] || focusAreas.all),
@@ -171,9 +198,17 @@ async function improveWithDoubao(fallback: StudyPlan, input: Required<RequestBod
         model,
         messages: [{ role: "system", content: system }, { role: "user", content: user }],
         temperature: 0.55,
-        max_tokens: 2200,
+        max_tokens: 1400,
         thinking: { type: "disabled" },
-        response_format: { type: "json_object" },
+        response_format: {
+          type: "json_schema",
+          json_schema: {
+            name: "bioscope_study_plan",
+            description: "BioScope 的中文生命科学个性化学习计划",
+            schema: planSchema,
+            strict: true,
+          },
+        },
       }),
       signal: AbortSignal.timeout(25_000),
     });
