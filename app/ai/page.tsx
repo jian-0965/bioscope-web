@@ -8,9 +8,9 @@ export default function AIPage() {
       <header className="ai-page-hero">
         <Link href="/" className="atlas-back"><ArrowLeft size={15}/> 返回首页</Link>
         <span><CalendarCheck2 size={17}/> BioScope 学习计划</span>
-        <h1>别盲目刷内容，按你的时间来学。</h1>
-        <p>选择目标、学习天数和每天的时间，系统会把生命科学内容安排成一份可以直接执行的周计划。</p>
-        <div><Sparkles size={15}/> 目标驱动 · 每日任务 · 错题复习</div>
+        <h1>不是每个阶段，都该用同一种方法。</h1>
+        <p>系统会结合学习阶段、知识类型与近期表现，在十种学习方法中动态调度，并保留你的自定义选择。</p>
+        <div><Sparkles size={15}/> 阶段调度 · 表现触发 · 方法可定制</div>
       </header>
       <StudyPlanBuilder />
     </main>
